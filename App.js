@@ -15,7 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator initialRouteName="mainScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="searchScreen" component={SearchScreen} />
+        <Stack.Screen name="SearchScreen" component={SearchScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -16,35 +16,58 @@ import { StyleSheet, Image, View, ImageBackground } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import {  Menu, Divider, Provider } from 'react-native-paper';
 
 const MainScreen = ({ navigation })=>{
+
+    const [visible, setVisible] = React.useState(false);
+
+  const openMenu = () => setVisible(true);
+
+  const closeMenu = () => setVisible(false);
 
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
       });
 
+    const buttonSearch = () => {
+        navigation.navigate("SearchScreen", {});
+    };
+
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
             <Spinner color="yellow"/>
-        </View>
+            </View>
         );
     };
 
     return(
-        <Container style={styles.container}>
+        <Container style={styles.container}>  
+        <Provider>        
             <Header style={styles.header}>
-                <Button style={styles.button}>
-                    <Image  source={require("../../assets/icons/menu-button.png")}
-                        style={styles.iconSize}/>
-                </Button>    
-                <Text style={styles.text}>WallSpace</Text>
-                <Button style={styles.button} onPress={()=> navigation.navigate("searchScreen")}>
+                <View style={styles.viewMenu}>
+                    <Menu
+                        visible={visible}
+                        onDismiss={closeMenu}
+                        anchor={<Button style={styles.button} onPress={openMenu}>
+                            <Image  source={require("../../assets/icons/menu-button.png")}
+                                    style={styles.iconSize}/>
+                                </Button>}>
+                        <Menu.Item  onPress={() => {}} title="Item 1" />
+                        <Divider />
+                        <Menu.Item onPress={() => {}} title="Item 2"/>
+                        <Divider />
+                        <Menu.Item onPress={() => {}} title="Item 3"/>
+                    </Menu>
+                </View>
+                <Text style={styles.text}>WallSpace</Text>    
+                <Button onPress={buttonSearch} style={styles.button} name="searchScreen">
                     <Image  source={require("../../assets/icons/search.png")}
-                        style={styles.iconSize}/>
-                </Button>                
+                            style={styles.iconSize}/>
+               </Button>
             </Header>
-            <Content >
+            <Content>
             <View style={styles.view}>
                 <H1 style={styles.h1}>CATEGORIAS</H1>
                 <H1 style={styles.h1}>INICIO</H1>
@@ -93,6 +116,7 @@ const MainScreen = ({ navigation })=>{
                 </Card>
             </Card>
             </Content>
+            </Provider>
         </Container>
     );
 };
@@ -101,11 +125,10 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor:"#0D0D0D",
     },
-    header:{
-        flex: 1,
+    header:{     
         alignItems: "center",
         backgroundColor: "#025159",
-        margin:"7%",
+        position:"relative",
     },
     text:{
         color: "#ffffff",
@@ -157,7 +180,21 @@ const styles = StyleSheet.create({
         borderColor: "#025159",
         width: 32,
         height: 32,
-    }
+        alignSelf:"center",
+        
+    },
+    item:{
+        alignItems:"center",
+    },
+    menuItem:{
+        zIndex:0,
+    },
+    viewMenu:{
+        paddingTop: 0,
+        flexDirection: 'row',
+        justifyContent: "flex-start",
+        position:"relative",
+        }
 });
 
 export default MainScreen; 

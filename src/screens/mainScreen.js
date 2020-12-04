@@ -23,8 +23,7 @@ const { width, height } = Dimensions.get("window");
 
 const MainScreen = ({ navigation })=>{
 
-    const [visible, setVisible] = React.useState(false);
-
+  const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
 
   const closeMenu = () => setVisible(false);
@@ -33,10 +32,25 @@ const MainScreen = ({ navigation })=>{
         'Triforce': require("../../assets/fonts/Triforce.ttf")
       });
 
-    const buttonSearch = () => {
-        navigation.navigate("SearchScreen", {});
+    const buttonPopular = () => {
+        navigation.navigate("popularScreen", {});
+        closeMenu();
+    };
+    
+    const buttonFavorites = () => {
+        navigation.navigate("favoritesScreen", {});
+        closeMenu();
     };
 
+    const buttonVideogames = () => {
+        navigation.navigate("gamesScreen", {});
+        closeMenu();
+    };
+
+    const buttonSearch = () => {
+        navigation.navigate("searchScreen", {});
+        closeMenu();
+    };
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -59,15 +73,11 @@ const MainScreen = ({ navigation })=>{
                                         style={styles.iconSize}/>
                                 </Button>}>
                         
-                        <Menu.Item  onPress={buttonSearch} title="Populares" style={styles.menuItem}/>
+                        <Menu.Item  onPress={buttonPopular} title="Populares" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={() => {}} title="Favoritos" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonFavorites} title="Favoritos" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={() => {}} title="Divertidos" style={styles.menuItem}/>
-                        <Divider />
-                        <Menu.Item onPress={() => {}} title="Paisajes" style={styles.menuItem}/>
-                        <Divider />
-                        <Menu.Item onPress={() => {}} title="Videojuegos" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonVideogames} title="Videojuegos" style={styles.menuItem}/>
                     </Menu>
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    
@@ -78,7 +88,7 @@ const MainScreen = ({ navigation })=>{
             </Header>
             <Content style={styles.provider}>
             <View style={styles.view}>
-                <H1 style={styles.h1}>CATEGORIAS</H1>
+                <H1 style={styles.h1}>FAVORITOS</H1>
                 <H1 style={styles.h1}>INICIO</H1>
                 <H1 style={styles.h1}>POPULARES</H1>
             </View>
@@ -163,8 +173,6 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:"row",
         alignSelf:"center",
-        marginLeft:8,
-        marginRight:20,
     },
     imageWallpaper:{
         width: 120,

@@ -1,60 +1,88 @@
 import {  Container, 
-    Header, 
-    Item, 
-    Input, 
-    Icon, 
-    Button,
-    H1, 
-    H2, 
-    Content, 
-    Spinner, 
-    Card, 
-    Text, 
-    CardItem 
-  } from "native-base";
-import { StyleSheet, Image, View, ImageBackground } from "react-native";
+  Header, 
+  Item, 
+  Input, 
+  Icon, 
+  Button,
+  H1, 
+  H2, 
+  Content, 
+  Spinner, 
+  Card, 
+  Text, 
+  CardItem 
+} from "native-base";
+import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {  Menu, Divider, Provider } from 'react-native-paper';
 
+
+const { width, height } = Dimensions.get("window");
+
 const SearchScreen = ()=>{
-  const [visible, setVisible] = React.useState(false);
 
-  const openMenu = () => setVisible(true);
+  let [fontsLoaded] = useFonts({
+    'Triforce': require("../../assets/fonts/Triforce.ttf")
+  });
 
-  const closeMenu = () => setVisible(false);
+  const [search, setSearch] = useState("");
+  const [searchError, setSearchError] = useState(false);
+  const [error, setError] = useState(false);
+  
+  const handlerSearch = () =>{
+    if (!search) {
+      setSearchError(true)
+    }else
+    {
+      navigation.navigate("searchScreen", {search})
+      // Borra la búsqueda anterior y coloca el espacio vacío
+      setSearch("");
+      setSearchError(false);
+    }
+  };
+
+  // Remueve el valor de error del input de búsqueda si el usuario ingresa información
+     // y llama a los hooks correspondientes para obtener la información.  
+     useEffect(() => {
+      if (search) setSearchError(false);
+    }, [search]);
+
+
+if(!fontsLoaded){
+        return(
+            <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
+            <Spinner color="yellow"/>
+            </View>
+        );
+    };
 
 
 
-
-return(
-  <Provider>
-  <View
-    style={{
-      paddingTop: 0,
-      flexDirection: 'row',
-      justifyContent: "flex-start",
-    }}>
-    <Menu
-      
-      visible={visible}
-      onDismiss={closeMenu}
-      anchor={<Button style={styles.button} onPress={openMenu}><Image  source={require("../../assets/icons/search.png")}
-      style={styles.iconSize}/></Button>}>
-      <Menu.Item onPress={() => {}} title="Item 1" />
-      <Menu.Item onPress={() => {}} title="Item 2" />
-      <Divider />
-      <Menu.Item onPress={() => {}} title="Item 3" />
-    </Menu>
-  </View>
-</Provider>
-)
+    return(
+      <Container style={styles.container}>  
+      <Provider>        
+          <Header searchBar style={styles.header}>
+            <Item style={styles.item}>
+            <Input placeholder="Buscar" value={search} onChangeText={setSearch} style={searchError ? styles.inputError : null} />
+            </Item>
+              <Button onPress={handlerSearch} style={styles.button} name="searchScreen">
+                  <Image  source={require("../../assets/icons/search.png")}
+                          style={styles.iconSize}/>
+             </Button>
+             
+          </Header>
+          </Provider>
+      </Container>
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
       backgroundColor:"#0D0D0D",
+      width: width,
+      height: height,
   },
   header:{     
       alignItems: "center",
@@ -70,7 +98,6 @@ const styles = StyleSheet.create({
   iconSize:{
       width: 30,
       height: 30,
-      alignSelf:"auto"
   },
   h1:{
       color: "#ffffff",
@@ -83,39 +110,57 @@ const styles = StyleSheet.create({
       flex:1,
       flexDirection:"row",
       alignSelf:"center",
-      margin:"1%",
+      marginLeft:8,
+      marginRight:20,
   },
   imageWallpaper:{
-      width: 110,
-      height: 200,
+      width: 120,
+      height: 210,
       margin:2,
       alignSelf:"center",
   },
   content: {
       backgroundColor: "#027373",
+      alignContent:"center",
+      height: height,
+      width: width,
   },
-  card:{
+  viewRow:{
       backgroundColor:"#0D0D0D",
-      flex:3,
       flexDirection:"row",
-      alignItems:"stretch",
-      borderColor:"#0D0D0D",        
+      alignSelf:"center",       
   },
   cardItem:{
       backgroundColor:"#027373",
       alignItems:"center",
-      borderColor:"#027373",        
+      borderColor:"#027373",
+      padding:2,
+      marginLeft:5,
+      marginRight:5,
   },
   button:{
       backgroundColor:"#025159",
       borderColor: "#025159",
-      width: 32,
-      height: 32,
+      width: 42,
+      height: 42,
       alignSelf:"center",
-      
   },
   item:{
-      alignItems:"center"
+      alignItems:"center",
+  },
+  viewMenu:{
+      paddingTop: 0,
+      flexDirection: 'row',
+      justifyContent: "flex-start",
+      position:"relative",
+      fontFamily: "Triforce",
+      
+  },
+  menuItem:{
+      color:"#025159",    
+  },
+  menu:{
+      fontFamily: "Triforce",
   }
 });
 

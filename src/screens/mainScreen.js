@@ -42,10 +42,6 @@ const MainScreen = ({ navigation })=>{
         closeMenu();
     };
 
-    const buttonVideogames = () => {
-        navigation.navigate("gamesScreen", {});
-        closeMenu();
-    };
 
     const buttonSearch = () => {
         navigation.navigate("searchScreen", {});
@@ -56,6 +52,22 @@ const MainScreen = ({ navigation })=>{
         navigation.navigate("addWallpaperScreen", {});
         closeMenu();
     };
+
+    const buttonVideogames = () => {
+        navigation.navigate("gamesScreen", {});
+        closeMenu();
+    };
+
+    const buttonPrueba = () => {
+        navigation.navigate("prueba", {});
+        closeMenu();
+    };
+
+    const buttonDrop = () => {
+        navigation.navigate("eliminar", {});
+        closeMenu();
+    };
+
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -80,9 +92,9 @@ const MainScreen = ({ navigation })=>{
                         
                         <Menu.Item  onPress={buttonPopular} title="Populares" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={buttonFavorites} title="Favoritos" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={buttonVideogames} title="Videojuegos" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonPrueba} title="Mostrar datos" style={styles.menuItem}/>
                         <Divider />
                         <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                     </Menu>

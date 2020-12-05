@@ -22,14 +22,10 @@ import {  Container,
   
   const { width, height } = Dimensions.get("window");
   
-  const AddWallpaperScreen = ({navigation})=>{
+  const DropScreen = ({navigation})=>{
     
-    const [name, setName] = useState("");
-    const [route, setRoute] = useState("");
-    const [tag, setTag] = useState("");
-    const [resolution, setResolution] = useState("");
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, addNewWallpaper, refreshWallpapers } = wallpaperContext;
+    const { wallpapers, dropWallpaper } = wallpaperContext;
 
 
     let [fontsLoaded] = useFonts({
@@ -38,14 +34,7 @@ import {  Container,
     });
 
     const handlerNewWallpaper = () =>{
-      const id=19; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
-                    
-                    // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
-                    // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio
-                    // autoincremente cuando se realice la inserción
-                    // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
-                    // la app
-      addNewWallpaper(id, name, route, tag, resolution, refreshWallpapers);
+        dropWallpaper();
 
       // Regresar a la pantalla anterior
       navigation.goBack();
@@ -63,34 +52,12 @@ import {  Container,
       return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-                <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
+                <Text style={styles.textHeader}>Eliminar todos los Wallpaper</Text>    
             </Header>
-            <H1 style={styles.h1}>Ingresa los datos correspondientes:</H1>
+            <H1 style={styles.h1}>Se eliminarn todos los wallpapers</H1>
             <Content>
-            <Form style={styles.form}>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Nombre</Label>
-              <Input style={styles.input} value={name} onChangeText={setName}/>
-            </Item>
-            
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Ruta</Label>
-              <Input style={styles.input} value={route} onChangeText={setRoute}/>
-            </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Etiquetas</Label>
-              <Input style={styles.input} value={tag} onChangeText={setTag}/>
-            </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Resolución</Label>
-              <Input style={styles.input} value={resolution} onChangeText={setResolution}/>
-            </Item> 
-            </Form>
             <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
-              <Text style={styles.text}>Agregar</Text>
+              <Text style={styles.text}>ELIMINAR</Text>
               </Button>
             </Content>
         </Container>
@@ -151,4 +118,4 @@ import {  Container,
     
   });
   
-  export default AddWallpaperScreen; 
+  export default DropScreen; 

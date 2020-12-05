@@ -10,9 +10,9 @@ export const WallpaperContextProvider = (props) => {
   const { wallpapers: initialWallpapers, children } = props;
 
   // Almacenar los valores en el estado
-  const [walpapers, setWallpapers] = useState(initialWallpapers);
+  const [wallpapers, setWallpapers] = useState(initialWallpapers);
 
-  // Cargar u obtener las notas
+  // Cargar u obtener los wallpapers
   useEffect(() => {
     refreshWallpapers();
   }, []);
@@ -21,14 +21,22 @@ export const WallpaperContextProvider = (props) => {
     return database.getWallpapers(setWallpapers);
   };
 
-  const addNewWallpaper = (wallpaper) => {
-    return database.addWallpapers(wallpaper, refreshWallpapers);
+  const addNewWallpaper = (id, name, route, tag, resolution, successFunc) => {
+    return database.addWallpapers(id, name, route, tag, resolution, refreshWallpapers);
+  };
+  const dropWallpaper = () =>{
+  return database.dropDatabaseTableAsync();
   };
 
+  const chargeDB = () =>{
+    return database.getWallpapers();
+  };
   // Crear el objeto de contexto
   const wallpaperContext = {
     wallpapers,
     addNewWallpaper,
+    dropWallpaper,
+    chargeDB
   };
 
   // Pasar los valores al proveedor y retornarlo

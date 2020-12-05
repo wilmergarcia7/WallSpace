@@ -1,3 +1,67 @@
+import React, { useContext } from "react";
+import { StyleSheet } from "react-native";
+import {
+  Container,
+  Content,
+  Fab,
+  Icon,
+  List,
+  ListItem,
+  Text,
+} from "native-base";
+
+// Utilizar el contexto de notas
+import { WallpaperContext } from "../context/WallpaperContext";
+
+const Prueba = ({ navigation }) => {
+  const { wallpapers } = useContext(WallpaperContext);
+
+  
+  // después de borrar todos los datos de la tabla ir a la pantalla useDatabase
+  // y quitar las barras // para la funcion await database.setupDatabaseTableAsync();
+  // presionar CTRL + S, eso para crear la tabla desde 0
+  // Después ir a db y actualizar presionando CTRL + s para que se borren los datos de la tabla
+  console.log(wallpapers);
+
+  return (
+    <Container>
+      <Content>
+        <List>
+          {wallpapers
+            ? wallpapers.map((wallpaper) => (
+                <ListItem key={wallpaper.id.toString()}>
+                  <Text style={styles.text}>{wallpaper.name}:</Text>
+                  <Text style={styles.text}>{wallpaper.tag}</Text>
+                  <Text style={styles.text}>{wallpaper.status}</Text>
+                </ListItem>
+              ))
+            : null}
+        </List>
+        <Fab
+          active={true}
+          position="bottomRight"
+          style={{ backgroundColor: "#ff0023" }}
+          direction="up"
+          onPress={() => {
+            navigation.navigate("addWallpaperScreen");
+          }}
+        >
+          <Icon name="plus" type="FontAwesome" />
+        </Fab>
+      </Content>
+    </Container>
+  );
+};
+
+const styles = StyleSheet.create({
+    text:{
+        marginLeft:"1%",
+    }
+});
+
+export default Prueba;
+
+/*
 import React from "react";
 import * as SQLite from "expo-sqlite";
 
@@ -123,3 +187,56 @@ export const database = {
   setupDatabaseTableAsync,
   setupWallpapersAsync,
 };
+*/
+
+/*
+
+import React, { useEffect, createContext, useState } from "react";
+import { database } from "../components/db";
+
+// Crear el contexto de las notas
+export const WallpaperContext = createContext({});
+
+export const WallpaperContextProvider = (props) => {
+  // Obtener los valores iniciales para el contexto
+  // se obtienen desde los props
+  const { wallpapers: initialWallpapers, children } = props;
+
+  // Almacenar los valores en el estado
+  const [wallpapers, setWallpapers] = useState(initialWallpapers);
+
+  // Cargar u obtener los wallpapers
+  useEffect(() => {
+    refreshWallpapers();
+  }, []);
+
+  const refreshWallpapers = () => {
+    return database.getWallpapers(setWallpapers);
+  };
+
+  const addNewWallpaper = (id, name, route, tag, resolution, successFunc) => {
+    return database.addWallpapers(id, name, route, tag, resolution, refreshWallpapers);
+  };
+  const dropWallpaper = () =>{
+  return database.dropDatabaseTableAsync();
+  };
+
+  const chargeDB = () =>{
+    return database.getWallpapers();
+  };
+  // Crear el objeto de contexto
+  const wallpaperContext = {
+    wallpapers,
+    addNewWallpaper,
+    dropWallpaper,
+    chargeDB
+  };
+
+  // Pasar los valores al proveedor y retornarlo
+  return (
+    <WallpaperContext.Provider value={wallpaperContext}>
+      {children}
+    </WallpaperContext.Provider>
+  );
+};
+*/

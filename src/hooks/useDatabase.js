@@ -6,9 +6,9 @@ const useDatabase = () => {
 
   const loadDatabase = async () => {
     try {
-      // await database.dropDatabaseTableAsync();
-      // await database.setupDatabaseTableAsync();
-      // await database.setupNotesAsync();
+       //await database.dropDatabaseTableAsync();
+       //await database.setupDatabaseTableAsync();
+       //await database.setupWallpapersAsync();
 
       // Finaliza la carga de la DB
       setIsLoadingComplete(true);

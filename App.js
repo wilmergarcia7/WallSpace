@@ -1,6 +1,7 @@
 import React from "react";
 import mainScreen from "./src/screens/mainScreen";
 import SearchScreen from "./src/screens/SearchScreen";
+import WallpaperScreen from "./src/screens/WallpaperScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -13,9 +14,10 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="mainScreen">
+      <Stack.Navigator initialRouteName="WallpaperScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
         <Stack.Screen name="SearchScreen" component={SearchScreen} />
+        <Stack.Screen name="WallpaperScreen" component={WallpaperScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

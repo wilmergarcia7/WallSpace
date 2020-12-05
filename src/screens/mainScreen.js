@@ -12,16 +12,18 @@ import {  Container,
     Text, 
     CardItem 
   } from "native-base";
-import { StyleSheet, Image, View, ImageBackground } from "react-native";
+import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {  Menu, Divider, Provider } from 'react-native-paper';
 
+
+const { width, height } = Dimensions.get("window");
+
 const MainScreen = ({ navigation })=>{
 
-    const [visible, setVisible] = React.useState(false);
-
+  const [visible, setVisible] = React.useState(false);
   const openMenu = () => setVisible(true);
 
   const closeMenu = () => setVisible(false);
@@ -30,8 +32,40 @@ const MainScreen = ({ navigation })=>{
         'Triforce': require("../../assets/fonts/Triforce.ttf")
       });
 
+    const buttonPopular = () => {
+        navigation.navigate("popularScreen", {});
+        closeMenu();
+    };
+    
+    const buttonFavorites = () => {
+        navigation.navigate("favoritesScreen", {});
+        closeMenu();
+    };
+
+
     const buttonSearch = () => {
-        navigation.navigate("SearchScreen", {});
+        navigation.navigate("searchScreen", {});
+        closeMenu();
+    };
+
+    const buttonAddWallpaper = () => {
+        navigation.navigate("addWallpaperScreen", {});
+        closeMenu();
+    };
+
+    const buttonVideogames = () => {
+        navigation.navigate("gamesScreen", {});
+        closeMenu();
+    };
+
+    const buttonPrueba = () => {
+        navigation.navigate("prueba", {});
+        closeMenu();
+    };
+
+    const buttonDrop = () => {
+        navigation.navigate("eliminar", {});
+        closeMenu();
     };
 
     if(!fontsLoaded){
@@ -47,18 +81,22 @@ const MainScreen = ({ navigation })=>{
         <Provider>        
             <Header style={styles.header}>
                 <View style={styles.viewMenu}>
-                    <Menu
-                        visible={visible}
-                        onDismiss={closeMenu}
-                        anchor={<Button style={styles.button} onPress={openMenu}>
-                            <Image  source={require("../../assets/icons/menu-button.png")}
-                                    style={styles.iconSize}/>
+                    <Menu   
+                            visible={visible}
+                            onDismiss={closeMenu}
+                            anchor={
+                                <Button style={styles.button} onPress={openMenu}>
+                                <Image  source={require("../../assets/icons/menu-button.png")}
+                                        style={styles.iconSize}/>
                                 </Button>}>
-                        <Menu.Item  onPress={() => {}} title="Item 1" />
+                        
+                        <Menu.Item  onPress={buttonPopular} title="Populares" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={() => {}} title="Item 2"/>
+                        <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={() => {}} title="Item 3"/>
+                        <Menu.Item onPress={buttonPrueba} title="Mostrar datos" style={styles.menuItem}/>
+                        <Divider />
+                        <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                     </Menu>
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    
@@ -67,13 +105,19 @@ const MainScreen = ({ navigation })=>{
                             style={styles.iconSize}/>
                </Button>
             </Header>
-            <Content>
+            <Content style={styles.provider}>
             <View style={styles.view}>
-                <H1 style={styles.h1}>CATEGORIAS</H1>
-                <H1 style={styles.h1}>INICIO</H1>
-                <H1 style={styles.h1}>POPULARES</H1>
+               <TouchableOpacity onPress={buttonPopular}> 
+                   <H1 style={styles.h1}>POPULARES</H1>
+                   </TouchableOpacity>
+                <TouchableOpacity onPress={buttonFavorites}> 
+                <H1 style={styles.h1}>FAVORITOS</H1>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={buttonVideogames}> 
+                <H1 style={styles.h1}>VIDEOJUEGOS</H1>
+                </TouchableOpacity>
             </View>
-            <Card style={styles.card}>
+            <View style={styles.viewRow}>
                 <Card style={styles.cardItem}>
                     <Image  source={require("../../assets/testImages/gato.jpg")} 
                             style={styles.imageWallpaper}/>
@@ -86,8 +130,8 @@ const MainScreen = ({ navigation })=>{
                     <Image  source={require("../../assets/testImages/librosrojos.jpg")} 
                             style={styles.imageWallpaper}/>
                 </Card>
-            </Card>
-            <Card style={styles.card}>
+            </View>
+            <View style={styles.viewRow}>
                 <Card style={styles.cardItem}>
                     <Image  source={require("../../assets/testImages/naruto.jpg")} 
                             style={styles.imageWallpaper}/>
@@ -100,8 +144,8 @@ const MainScreen = ({ navigation })=>{
                     <Image  source={require("../../assets/testImages/zeldaTriforce.jpg")} 
                             style={styles.imageWallpaper}/>
                 </Card>
-            </Card>
-            <Card style={styles.card}>
+            </View>
+            <View style={styles.viewRow}>
                 <Card style={styles.cardItem}>
                     <Image  source={require("../../assets/testImages/busqueda.png")} 
                             style={styles.imageWallpaper}/>
@@ -114,7 +158,7 @@ const MainScreen = ({ navigation })=>{
                     <Image  source={require("../../assets/testImages/BOTW.jpg")} 
                             style={styles.imageWallpaper}/>
                 </Card>
-            </Card>
+            </View>
             </Content>
             </Provider>
         </Container>
@@ -124,6 +168,8 @@ const MainScreen = ({ navigation })=>{
 const styles = StyleSheet.create({
     container: {
         backgroundColor:"#0D0D0D",
+        width: width,
+        height: height,
     },
     header:{     
         alignItems: "center",
@@ -144,36 +190,38 @@ const styles = StyleSheet.create({
     h1:{
         color: "#ffffff",
         fontFamily: "Triforce",
-        fontSize: 17,
-        marginLeft:"6%",
-        marginRight:"6%",
+        fontSize: 18,
+        marginLeft:"5%",        
     },
     view:{
         flex:1,
         flexDirection:"row",
         alignSelf:"center",
-        margin:"1%",
     },
     imageWallpaper:{
-        width: 110,
-        height: 200,
+        width: 120,
+        height: 210,
         margin:2,
         alignSelf:"center",
     },
     content: {
         backgroundColor: "#027373",
+        alignContent:"center",
+        height: height,
+        width: width,
     },
-    card:{
+    viewRow:{
         backgroundColor:"#0D0D0D",
-        flex:3,
         flexDirection:"row",
-        alignItems:"stretch",
-        borderColor:"#0D0D0D",        
+        alignSelf:"center",       
     },
     cardItem:{
         backgroundColor:"#027373",
         alignItems:"center",
-        borderColor:"#027373",        
+        borderColor:"#027373",
+        padding:2,
+        marginLeft:5,
+        marginRight:5,
     },
     button:{
         backgroundColor:"#025159",
@@ -181,20 +229,24 @@ const styles = StyleSheet.create({
         width: 32,
         height: 32,
         alignSelf:"center",
-        
     },
     item:{
         alignItems:"center",
-    },
-    menuItem:{
-        zIndex:0,
     },
     viewMenu:{
         paddingTop: 0,
         flexDirection: 'row',
         justifyContent: "flex-start",
         position:"relative",
-        }
+        fontFamily: "Triforce",
+        
+    },
+    menuItem:{
+        color:"#025159",    
+    },
+    menu:{
+        fontFamily: "Triforce",
+    }
 });
 
 export default MainScreen; 

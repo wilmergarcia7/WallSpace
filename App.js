@@ -4,6 +4,7 @@ import SearchScreen from "./src/screens/SearchScreen";
 import FavoritesScreen from "./src/screens/FavoritesScreen";
 import PopularScreen from "./src/screens/PopularScreen";
 import VideogamesScreen from "./src/screens/VideogamesScreen";
+import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -22,6 +23,7 @@ export default function App() {
         <Stack.Screen name="favoritesScreen" component={FavoritesScreen} />
         <Stack.Screen name="popularScreen" component={PopularScreen} />
         <Stack.Screen name="gamesScreen" component={VideogamesScreen} />
+        <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )

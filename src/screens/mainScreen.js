@@ -51,6 +51,11 @@ const MainScreen = ({ navigation })=>{
         navigation.navigate("searchScreen", {});
         closeMenu();
     };
+
+    const buttonAddWallpaper = () => {
+        navigation.navigate("addWallpaperScreen", {});
+        closeMenu();
+    };
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -78,6 +83,8 @@ const MainScreen = ({ navigation })=>{
                         <Menu.Item onPress={buttonFavorites} title="Favoritos" style={styles.menuItem}/>
                         <Divider />
                         <Menu.Item onPress={buttonVideogames} title="Videojuegos" style={styles.menuItem}/>
+                        <Divider />
+                        <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                     </Menu>
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    
@@ -88,9 +95,15 @@ const MainScreen = ({ navigation })=>{
             </Header>
             <Content style={styles.provider}>
             <View style={styles.view}>
+               <TouchableOpacity onPress={buttonPopular}> 
+                   <H1 style={styles.h1}>POPULARES</H1>
+                   </TouchableOpacity>
+                <TouchableOpacity onPress={buttonFavorites}> 
                 <H1 style={styles.h1}>FAVORITOS</H1>
-                <H1 style={styles.h1}>INICIO</H1>
-                <H1 style={styles.h1}>POPULARES</H1>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={buttonVideogames}> 
+                <H1 style={styles.h1}>VIDEOJUEGOS</H1>
+                </TouchableOpacity>
             </View>
             <View style={styles.viewRow}>
                 <Card style={styles.cardItem}>
@@ -165,9 +178,8 @@ const styles = StyleSheet.create({
     h1:{
         color: "#ffffff",
         fontFamily: "Triforce",
-        fontSize: 17,
-        marginLeft:"6%",
-        marginRight:"6%",
+        fontSize: 18,
+        marginLeft:"5%",        
     },
     view:{
         flex:1,

@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 
 
-const wallpaperScreen = ({ navigation })=>{
+const wallpaperScreen = ({ navigation})=>{
 
     // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
     const { width, height } = Dimensions.get("window");

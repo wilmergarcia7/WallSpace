@@ -68,6 +68,11 @@ const MainScreen = ({ navigation })=>{
         closeMenu();
     };
 
+    const buttonMyWallpaper = () => {
+        navigation.navigate("myWallpaper", {});
+        closeMenu();
+    };
+
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -97,6 +102,8 @@ const MainScreen = ({ navigation })=>{
                         <Menu.Item onPress={buttonPrueba} title="Mostrar datos" style={styles.menuItem}/>
                         <Divider />
                         <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
+                        <Divider />
+                        <Menu.Item onPress={buttonMyWallpaper} title="Mis Wallpaper" style={styles.menuItem}/>
                     </Menu>
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    

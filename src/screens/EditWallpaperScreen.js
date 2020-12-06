@@ -22,7 +22,7 @@ import {  Container,
   
   const { width, height } = Dimensions.get("window");
   
-  const AddWallpaperScreen = ({navigation})=>{
+  const editWallpaperScreen = ({navigation})=>{
     
     const [name, setName] = useState("");
     const [route, setRoute] = useState("");
@@ -65,7 +65,7 @@ import {  Container,
             <Header style={styles.header}>
                 <Text style={styles.textHeader}>Editar Wallpaper</Text>    
             </Header>
-            <H1 style={styles.h1}>Ingresa los datos correspondientes:</H1>
+            <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
             <Content>
             <Form style={styles.form}>
            
@@ -121,7 +121,7 @@ import {  Container,
     h1:{
       color: "#ffffff",
       fontFamily: "Triforce",
-      fontSize:28,
+      fontSize:25,
       alignSelf:"center",
       marginTop:"5%",
     },
@@ -151,4 +151,4 @@ import {  Container,
     
   });
   
-  export default AddWallpaperScreen; 
+  export default editWallpaperScreen; 

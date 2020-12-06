@@ -4,7 +4,6 @@ import {  Container,
     Spinner, 
     Card, 
     Text,
-    Link,
   } from "native-base";
 import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-native";
 import React, { useEffect, useState } from "react";
@@ -31,21 +30,23 @@ const wallpaperScreen = ({ navigation })=>{
     return(
         <Container>
             <Content>
-                <ImageBackground source={require("../../assets/testImages/113021.png")} style={{ width: width, height: height, justifyContent: "flex-end", alignItems: "center"}}>
+                <ImageBackground source={require("../../assets/testImages/113021.png")} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
                     <View style={styles.optionBar}>
-                        <View style={{flexDirection: 'row'}}>
+                        <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
+                            <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+                                <Image source={require("../../assets/icons/back.png")} style={styles.icono}/>
+                            </Button>
+                        </View>
+                        <View style={{flexDirection: "row", marginLeft:"40%"}}>
                             <Button style={styles.button} transparent>
                                 <Image source={require("../../assets/icons/view.png")} style={styles.icono}/>
-                            </Button>
-                            <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/download.png")} style={styles.icono}/>
                             </Button>
                             <Button style={styles.button} transparent>
                                 <Image source={require("../../assets/icons/heart.png")} style={styles.icono}/>
                             </Button>
                         </View>
                     </View>
-                </ImageBackground> 
+                </ImageBackground>
                 <View style={styles.infomationContainer}>
                     <View style={styles.tagContainer}>
                         <Image source={require("../../assets/icons/tag.png")} style={{height: 25, width: 25, marginLeft: "2%"}}/>
@@ -53,7 +54,7 @@ const wallpaperScreen = ({ navigation })=>{
                     </View>
                     <Text style={styles.infomation}>NOMBRE: Zelda </Text>
                     <Text style={styles.infomation}>AUTOR: Wilmer Garcia</Text> 
-                    <Text style={styles.infomation}>RESOLUCION: 1080x1920</Text> 
+                    <Text style={styles.infomation}>RESOLUCION: 1080 x 1920</Text> 
                     <Text style={styles.infomation}>FECHA: 04/12/2020</Text> 
                 </View>
             </Content>
@@ -68,18 +69,17 @@ const styles = StyleSheet.create({
     optionBar: {
         width: "100%",
         height: 50,
-        alignItems: "center",
-        justifyContent: "center",
         backgroundColor:"rgba(2, 89, 89, 0.5)",
+        flexDirection: 'row',
+        justifyContent:"center",
     },
     icono:{
-        height: 35,
-        width: 35,
+        height: 30,
+        width: 30,
     },
     button:{
         alignSelf: "center",
-        paddingLeft: "11%",
-        paddingRight: "11%",
+        paddingLeft: "14%",
     },
     infomation:{
         fontFamily: "Triforce",
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
         color: "#FFFFFF",
         marginTop: "3%",
         marginLeft: "2%",
+        marginBottom: "3%"
     },
     infomationContainer:{
         backgroundColor: "rgb(2, 89, 89)",

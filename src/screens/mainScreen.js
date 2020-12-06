@@ -118,10 +118,12 @@ const MainScreen = ({ navigation })=>{
                 </TouchableOpacity>
             </View>
             <View style={styles.viewRow}>
+                <TouchableOpacity onPress={() => navigation.navigate("WallpaperScreen",{})}>
                 <Card style={styles.cardItem}>
                     <Image  source={require("../../assets/testImages/gato.jpg")} 
                             style={styles.imageWallpaper}/>
                 </Card>
+                </TouchableOpacity>
                 <Card style={styles.cardItem}>
                     <Image  source={require("../../assets/testImages/libros.jpg")} 
                             style={styles.imageWallpaper}/>

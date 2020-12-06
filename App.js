@@ -1,9 +1,7 @@
 import React from "react";
 import mainScreen from "./src/screens/mainScreen";
 import SearchScreen from "./src/screens/SearchScreen";
-<<<<<<< HEAD
 import WallpaperScreen from "./src/screens/WallpaperScreen";
-=======
 import FavoritesScreen from "./src/screens/FavoritesScreen";
 import PopularScreen from "./src/screens/PopularScreen";
 import VideogamesScreen from "./src/screens/VideogamesScreen";
@@ -12,7 +10,6 @@ import prueba from "./src/screens/prueba";
 import  DropScreen  from "./src/screens/DropScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
->>>>>>> devWilmer
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -29,12 +26,6 @@ export default function App() {
 
   return (
     <NavigationContainer>
-<<<<<<< HEAD
-      <Stack.Navigator initialRouteName="WallpaperScreen">
-        <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="SearchScreen" component={SearchScreen} />
-        <Stack.Screen name="WallpaperScreen" component={WallpaperScreen} options={{headerShown:false}}/>
-=======
       <WallpaperContextProvider>
       <Stack.Navigator initialRouteName="mainScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
@@ -45,7 +36,7 @@ export default function App() {
         <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} />
         <Stack.Screen name="prueba" component={prueba} />
         <Stack.Screen name="eliminar" component={DropScreen} />
->>>>>>> devWilmer
+        <Stack.Screen name="WallpaperScreen" component={WallpaperScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
       </WallpaperContextProvider>
     </NavigationContainer>

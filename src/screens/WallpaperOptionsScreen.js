@@ -9,6 +9,12 @@ import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-nativ
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const wallpaperOptionsScreen = ({ navigation})=>{
 
@@ -38,7 +44,7 @@ const wallpaperOptionsScreen = ({ navigation})=>{
                             </Button>
                         </View>
                         <View style={{flexDirection: "row", marginLeft:"40%"}}>
-                            <Button style={styles.button} transparent>
+                            <Button style={styles.button} transparent onPress={() => navigation.navigate("EditWallpaperScreen",{})}>
                                 <Image source={require("../../assets/icons/edit.png")} style={styles.icono}/>
                             </Button>
                             <Button style={styles.button} transparent>

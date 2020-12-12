@@ -58,8 +58,6 @@ if(!fontsLoaded){
         );
     };
 
-
-
     return(
       <Container style={styles.container}>  
       <Provider>        

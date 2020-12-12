@@ -11,14 +11,16 @@ import {  Container,
     Text, 
     CardItem,
     Form,
-    Label 
+    Label,
+    Button 
   } from "native-base";
   import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
-  import { useFonts } from "expo-font";
+  //import { useFonts } from "expo-font";
   import { TouchableOpacity } from "react-native-gesture-handler";
-  import {  Button} from 'react-native-paper';
+//  import {  Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
+  import * as Font from "expo-font";
   
   const { width, height } = Dimensions.get("window");
   
@@ -27,31 +29,52 @@ import {  Container,
     const [name, setName] = useState("");
     const [route, setRoute] = useState("");
     const [tag, setTag] = useState("");
-    const [resolution, setResolution] = useState("");
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+    const [enableSave, setEnableSave] = useState(true);
+    const [errorWallpaper, setErrorWallpaper] = useState(false);
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, addNewWallpaper, refreshWallpapers } = wallpaperContext;
+    const { addNewWallpaper, refreshWallpapers } = wallpaperContext;
 
 
-    let [fontsLoaded] = useFonts({
-      'Triforce': require("../../assets/fonts/Triforce.ttf")
+     // Cargar la fuente de manera asíncrona
+  useEffect(() => {
+    const loadFontsAsync = async () => {
+      await Font.loadAsync({
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+        'Triforce': require("../../assets/fonts/Triforce.ttf")
+      }).then(() => {
+        setFontsLoaded(true);
+      });
+    };
+
+    loadFontsAsync();
+  }, []);
+
+    
+    
+
+    useEffect(() => {
+      if (name&&route&&tag) {
+      setEnableSave(false);
+      }
+      else setEnableSave(true);
+    }, [name, route, tag]);
+
+
+    const handlerNewWallpaper = async () =>{
       
-    });
+      if (name&&route&&tag){     
+        await addNewWallpaper(name, route, tag, refreshWallpapers);
 
-    const handlerNewWallpaper = () =>{
-      const id=19; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
-                    
-                    // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
-                    // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio
-                    // autoincremente cuando se realice la inserción
-                    // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
-                    // la app
-      addNewWallpaper(id, name, route, tag, resolution, refreshWallpapers);
-
-      // Regresar a la pantalla anterior
-      navigation.goBack();
+        // Regresar a la pantalla anterior
+        navigation.goBack();
+      } else {
+        setErrorWallpaper(true);
+      }
+      
+      
     };    
  
-  
   if(!fontsLoaded){
           return(
               <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -83,13 +106,12 @@ import {  Container,
               <Label style={styles.label}>Etiquetas</Label>
               <Input style={styles.input} value={tag} onChangeText={setTag}/>
             </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Resolución</Label>
-              <Input style={styles.input} value={resolution} onChangeText={setResolution}/>
-            </Item> 
+        
             </Form>
-            <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
+            <Button style={enableSave ? styles.buttonError : styles.button} 
+                    onPress={handlerNewWallpaper}
+                    disabled={enableSave}
+                    >
               <Text style={styles.text}>Agregar</Text>
               </Button>
             </Content>
@@ -143,12 +165,17 @@ import {  Container,
       fontFamily: "Triforce",
     },
     button:{
-      marginLeft:"25%",
-      marginRight:"25%",
-      marginTop:"8%",
+      fontFamily: "Triforce",
+      alignSelf: "center",
+      marginTop: 10,
       backgroundColor:"#025159",
+      
+    },
+    buttonError:{
+      fontFamily: "Triforce",
+      alignSelf: "center",
+      marginTop: 10,
     }
-    
   });
   
   export default AddWallpaperScreen; 

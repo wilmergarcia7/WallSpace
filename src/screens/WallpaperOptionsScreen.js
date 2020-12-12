@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 
 
-const wallpaperScreen = ({ navigation})=>{
+const wallpaperOptionsScreen = ({ navigation})=>{
 
     // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
     const { width, height } = Dimensions.get("window");
@@ -39,10 +39,10 @@ const wallpaperScreen = ({ navigation})=>{
                         </View>
                         <View style={{flexDirection: "row", marginLeft:"40%"}}>
                             <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/view.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/edit.png")} style={styles.icono}/>
                             </Button>
                             <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/heart.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/delete.png")} style={styles.icono}/>
                             </Button>
                         </View>
                     </View>
@@ -104,5 +104,5 @@ const styles = StyleSheet.create({
     },
 });
 
-export default wallpaperScreen;
+export default wallpaperOptionsScreen;
 

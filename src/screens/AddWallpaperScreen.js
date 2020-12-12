@@ -38,7 +38,7 @@ import {  Container,
     });
 
     const handlerNewWallpaper = () =>{
-      const id=19; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
+      const id=20; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
                     
                     // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
                     // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio

@@ -50,6 +50,49 @@ const addWallpapers = (id, name, route, tag, resolution, successFunc) => {
   );
 };
 
+// editar Wallpapers
+const editWallpaper = (name, route, tag, resolution, id, successFunc) => {
+  db.transaction(
+    (tx) => {
+      tx.executeSql("update wallpapers set name = ?, route = ?, tag = ?, resolution = ?, status = ? where id = ?", [
+        name,
+        route,
+        tag,
+        resolution,
+        "EDITADA",
+        id,
+      ]);
+    },
+    (_t, error) => {
+      console.log("Error al editar el wallpaper");
+      console.log(error);
+    },
+    (_t, _success) => {
+      successFunc;
+    }
+  );
+};
+
+// Obtener la nota por el id
+const getWallpaperById = (id, successFunc) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "select * from wallpapers where id = ?",
+      [id],
+      (_, { rows: { _array } }) => {
+        setNoteFunc(_array);
+      },
+      (_t, error) => {
+        console.log("Error al obtener el wallpaper");
+        console.log(error);
+      },
+      (_t, _success) => {
+        successFunc;
+      }
+    );
+  });
+};
+
 // Borrar la base de datos
 const dropDatabaseTableAsync = async () => {
   return new Promise((resolve, reject) => {
@@ -119,7 +162,9 @@ const setupWallpapersAsync = async () => {
 export const database = {
   getWallpapers,
   addWallpapers,
+  editWallpaper,
   dropDatabaseTableAsync,
   setupDatabaseTableAsync,
   setupWallpapersAsync,
+  getWallpaperById
 };

@@ -45,7 +45,7 @@ import {  Container,
             </Header>
             <Content>
                 <View style={styles.viewRow}>
-                    <TouchableOpacity onPress={() => navigation.navigate("EditWallpaperScreen",{})}>
+                    <TouchableOpacity onPress={() => navigation.navigate("WallpaperOptionsScreen",{})}>
                     <Card style={styles.cardItem}>
                         <Image  source={require("../../assets/testImages/gato.jpg")} 
                                 style={styles.imageWallpaper}/>

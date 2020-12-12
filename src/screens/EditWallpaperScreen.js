@@ -11,15 +11,15 @@ import {  Container,
     Text, 
     CardItem,
     Form,
-    Label 
+    Label,
+    ListItem,
   } from "native-base";
-  import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
-  import React, { useContext, useEffect, useState } from "react";
+  import { StyleSheet, View, Dimensions } from "react-native";
+  import React, { useContext, useState } from "react";
   import { useFonts } from "expo-font";
-  import { TouchableOpacity } from "react-native-gesture-handler";
-  import {  Button} from 'react-native-paper';
+  import { Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
-  
+
   const { width, height } = Dimensions.get("window");
   
   const editWallpaperScreen = ({navigation})=>{
@@ -29,30 +29,52 @@ import {  Container,
     const [tag, setTag] = useState("");
     const [resolution, setResolution] = useState("");
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, addNewWallpaper, refreshWallpapers } = wallpaperContext;
+    const { refreshWallpapers, editWallpaper } = wallpaperContext;
 
+    const { wallpapers } = useContext(WallpaperContext);
+
+    console.log(wallpapers[1]['id']);
 
     let [fontsLoaded] = useFonts({
       'Triforce': require("../../assets/fonts/Triforce.ttf")
       
     });
 
+    const id=20;
+
     const handlerNewWallpaper = () =>{
-      const id=19; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
+       // Este id debe cambiar, si es el mismo provoca error. añadir +1 
                     
                     // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
                     // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio
                     // autoincremente cuando se realice la inserción
                     // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
                     // la app
-      addNewWallpaper(id, name, route, tag, resolution, refreshWallpapers);
+
+      if(!name){
+        console.log("1");
+        editWallpaper(wallpapers[0]['name'], route, tag, resolution, id, refreshWallpapers);
+      }
+      if(!route){
+        console.log("1");
+        editWallpaper(name, wallpapers[0]['route'], tag, resolution, id, refreshWallpapers);
+      }
+      if(!tag){
+        console.log("1");
+        editWallpaper(name, route, wallpapers[0]['tag'], resolution, id, refreshWallpapers);
+      }
+      if(!resolution){
+        console.log("1");
+        editWallpaper(name, route, tag, wallpapers[0]['resolution'], id, refreshWallpapers);
+      }
+      //editWallpaper(name, route, tag, resolution, id, refreshWallpapers);
 
       // Regresar a la pantalla anterior
       navigation.goBack();
     };    
  
   
-  if(!fontsLoaded){
+  if(!fontsLoaded || !wallpapers){
           return(
               <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
               <Spinner color="yellow"/>
@@ -67,30 +89,30 @@ import {  Container,
             </Header>
             <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
             <Content>
-            <Form style={styles.form}>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Nombre</Label>
-              <Input style={styles.input} value={name} onChangeText={setName}/>
-            </Item>
-            
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Ruta</Label>
-              <Input style={styles.input} value={route} onChangeText={setRoute}/>
-            </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Etiquetas</Label>
-              <Input style={styles.input} value={tag} onChangeText={setTag}/>
-            </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Resolución</Label>
-              <Input style={styles.input} value={resolution} onChangeText={setResolution}/>
-            </Item> 
-            </Form>
-            <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
-              <Text style={styles.text}>Editar</Text>
+            {wallpapers
+            ? wallpapers.map((wallpaper) => (
+              <Form style={styles.form} key={wallpaper.id.toString()}>
+                <Item stackedLabel style={styles.item}>
+                  <Label style={styles.label}>Nombre</Label>
+                  <Input style={styles.input} placeholder={wallpaper.name} value={name} onChangeText={setName} defaultValue={wallpaper.name}/>
+                </Item>
+                <Item stackedLabel style={styles.item}>
+                  <Label style={styles.label}>Ruta</Label>
+                  <Input style={styles.input} placeholder={wallpaper.route} value={route} onChangeText={setRoute} defaultValue={wallpaper.route}/>
+                </Item>
+                <Item stackedLabel style={styles.item}>
+                  <Label style={styles.label}>Etiquetas</Label>
+                  <Input style={styles.input} placeholder={wallpaper.tag} value={tag} onChangeText={setTag}/>
+                </Item>
+                <Item stackedLabel style={styles.item}>
+                  <Label style={styles.label}>Resolición</Label>
+                  <Input style={styles.input} placeholder={wallpaper.resolution} value={resolution} onChangeText={setResolution}/>
+                </Item>
+              </Form>
+              ))
+              : null}
+              <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
+                <Text style={styles.text}>Editar</Text>
               </Button>
             </Content>
         </Container>
@@ -130,9 +152,8 @@ import {  Container,
     },
     input:{
       color:"#FFFFFF",
-      fontSize:25,
+      fontSize:22,
       fontFamily: "Triforce",
-      
     },
     form:{
         flex:1,
@@ -145,7 +166,7 @@ import {  Container,
     button:{
       marginLeft:"25%",
       marginRight:"25%",
-      marginTop:"8%",
+      marginTop:"15%",
       backgroundColor:"#025159",
     }
     

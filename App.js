@@ -7,8 +7,9 @@ import PopularScreen from "./src/screens/PopularScreen";
 import VideogamesScreen from "./src/screens/VideogamesScreen";
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
 import prueba from "./src/screens/prueba";
-import myWallpaper from "./src/screens/myWallpaper"
-import EditWallpaperScreen from "./src/screens/EditWallpaperScreen"
+import myWallpaper from "./src/screens/myWallpaper";
+import WallpaperOptionsScreen from "./src/screens/WallpaperOptionsScreen"
+import EditWallpaperScreen from "./src/screens/EditWallpaperScreen";
 import  DropScreen  from "./src/screens/DropScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
@@ -41,6 +42,7 @@ export default function App() {
         <Stack.Screen name="WallpaperScreen" component={WallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="myWallpaper" component={myWallpaper} options={{headerShown:false}}/>
         <Stack.Screen name="EditWallpaperScreen" component={EditWallpaperScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="WallpaperOptionsScreen" component={WallpaperOptionsScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
       </WallpaperContextProvider>
     </NavigationContainer>

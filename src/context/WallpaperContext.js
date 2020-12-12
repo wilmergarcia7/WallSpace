@@ -24,6 +24,12 @@ export const WallpaperContextProvider = (props) => {
   const addNewWallpaper = (id, name, route, tag, resolution, successFunc) => {
     return database.addWallpapers(id, name, route, tag, resolution, refreshWallpapers);
   };
+  const editWallpaper = (name, route, tag, resolution, id) => {
+    return database.editWallpaper(name, route, tag, resolution, id, refreshWallpapers);
+  };
+  const getWallpaperById = (id) => {
+    return database.getNoteById(id, refreshWallpapers);
+  };
   const dropWallpaper = () =>{
   return database.dropDatabaseTableAsync();
   };
@@ -36,7 +42,9 @@ export const WallpaperContextProvider = (props) => {
     wallpapers,
     addNewWallpaper,
     dropWallpaper,
-    chargeDB
+    chargeDB,
+    editWallpaper,
+    getWallpaperById
   };
 
   // Pasar los valores al proveedor y retornarlo

@@ -5,7 +5,7 @@ import * as SQLite from "expo-sqlite";
 // Crea y abre la base de datos
 const db = SQLite.openDatabase("wallpapers.db");
 
-
+// Variable para guardar la fecha
 let getDate = new Date();
     getDate = getDate.getDate() + "/" + (getDate.getMonth()+1) + "/"+ getDate.getFullYear();
 

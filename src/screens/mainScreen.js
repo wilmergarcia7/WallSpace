@@ -110,20 +110,20 @@ const MainScreen = ({ navigation })=>{
             </Header>
             <Content style={styles.provider}>
             
-            <List>
+            <View style={styles.view}>
           {wallpapers
             ? wallpapers.map((wallpaper) => (
-                <ListItem key={wallpaper.id.toString()}>
+                <View key={wallpaper.id.toString()} style={styles.cardItem}>
                   <Text style={styles.textt}>{wallpaper.name}:</Text>
                   <Card style={styles.cardItem}>
-           <Image source={imagesWallpapers[wallpaper.code]}
+                <Image source={imagesWallpapers[wallpaper.code]}
                   style={styles.iconSize}/>
                   {console.log(wallpaper.id)}
-        </Card>          
-                </ListItem>
+                </Card>          
+                </View>
               ))
             : null}
-        </List>
+        </View>
         
         
       </Content>
@@ -169,8 +169,8 @@ const styles = StyleSheet.create({
     },
     view:{
         flex:1,
-        flexDirection:"row",
-        alignSelf:"center",
+        flexDirection:"column",
+        alignItems:"center",
     },
     imageWallpaper:{
         width: 120,

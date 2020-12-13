@@ -1,9 +1,6 @@
 import React from "react";
 import mainScreen from "./src/screens/mainScreen";
 import SearchScreen from "./src/screens/SearchScreen";
-import FavoritesScreen from "./src/screens/FavoritesScreen";
-import PopularScreen from "./src/screens/PopularScreen";
-import VideogamesScreen from "./src/screens/VideogamesScreen";
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
 import prueba from "./src/screens/prueba";
 import  DropScreen  from "./src/screens/DropScreen";
@@ -29,9 +26,6 @@ export default function App() {
       <Stack.Navigator initialRouteName="mainScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
         <Stack.Screen name="searchScreen" component={SearchScreen} />
-        <Stack.Screen name="favoritesScreen" component={FavoritesScreen} />
-        <Stack.Screen name="popularScreen" component={PopularScreen} />
-        <Stack.Screen name="gamesScreen" component={VideogamesScreen} />
         <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} />
         <Stack.Screen name="prueba" component={prueba} />
         <Stack.Screen name="eliminar" component={DropScreen} />

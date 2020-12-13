@@ -22,8 +22,8 @@ export const WallpaperContextProvider = (props) => {
     return database.getWallpapers(setWallpapers);
   };
 
-  const addNewWallpaper = async (name, route, tag) => {
-    await database.addWallpapers(name, route, tag, refreshWallpapers);
+  const addNewWallpaper = async (name, code, tag) => {
+    await database.addWallpapers(name,  code, tag, refreshWallpapers);
     return refreshWallpapers();
   };
 

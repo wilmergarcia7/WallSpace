@@ -27,7 +27,7 @@ import {  Container,
   const AddWallpaperScreen = ({navigation})=>{
     
     const [name, setName] = useState("");
-    const [route, setRoute] = useState("");
+    const [code, setCode] = useState("");
     const [tag, setTag] = useState("");
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const [enableSave, setEnableSave] = useState(true);
@@ -54,17 +54,17 @@ import {  Container,
     
 
     useEffect(() => {
-      if (name&&route&&tag) {
+      if (name&&code&&tag) {
       setEnableSave(false);
       }
       else setEnableSave(true);
-    }, [name, route, tag]);
+    }, [name, code, tag]);
 
 
     const handlerNewWallpaper = async () =>{
       
-      if (name&&route&&tag){     
-        await addNewWallpaper(name, route, tag, refreshWallpapers);
+      if (name&&code&&tag){     
+        await addNewWallpaper(name, code, tag, refreshWallpapers);
 
         // Regresar a la pantalla anterior
         navigation.goBack();
@@ -81,9 +81,9 @@ import {  Container,
               <Spinner color="yellow"/>
               </View>
           );
-      };
+   };
   
-      return(
+        return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
                 <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
@@ -98,8 +98,8 @@ import {  Container,
             </Item>
             
             <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Ruta</Label>
-              <Input style={styles.input} value={route} onChangeText={setRoute}/>
+              <Label style={styles.label}>Código</Label>
+              <Input style={styles.input} value={code} onChangeText={setCode}/>
             </Item>
            
             <Item floatingLabel style={styles.item}>

@@ -10,38 +10,35 @@ import {  Container,
     Spinner, 
     Card, 
     Text, 
-    CardItem 
+    CardItem,
+    List,
+    ListItem, 
   } from "native-base";
-import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Image, View, FlatList, Dimensions } from "react-native";
+import React, { useEffect, useState, useContext } from "react";
 import { useFonts } from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {  Menu, Divider, Provider } from 'react-native-paper';
+import { WallpaperContext } from "../context/WallpaperContext";
+
 
 
 const { width, height } = Dimensions.get("window");
 
 const MainScreen = ({ navigation })=>{
+    const wallpaperContext = useContext(WallpaperContext);
+    const { wallpapers } = wallpaperContext;
+    
 
-  const [visible, setVisible] = React.useState(false);
-  const openMenu = () => setVisible(true);
 
-  const closeMenu = () => setVisible(false);
+    const [visible, setVisible] = React.useState(false);
+    const openMenu = () => setVisible(true);
+
+    const closeMenu = () => setVisible(false);
 
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
       });
-
-    const buttonPopular = () => {
-        navigation.navigate("popularScreen", {});
-        closeMenu();
-    };
-    
-    const buttonFavorites = () => {
-        navigation.navigate("favoritesScreen", {});
-        closeMenu();
-    };
-
 
     const buttonSearch = () => {
         navigation.navigate("searchScreen", {});
@@ -53,10 +50,6 @@ const MainScreen = ({ navigation })=>{
         closeMenu();
     };
 
-    const buttonVideogames = () => {
-        navigation.navigate("gamesScreen", {});
-        closeMenu();
-    };
 
     const buttonPrueba = () => {
         navigation.navigate("prueba", {});
@@ -68,6 +61,7 @@ const MainScreen = ({ navigation })=>{
         closeMenu();
     };
 
+   
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -75,7 +69,18 @@ const MainScreen = ({ navigation })=>{
             </View>
         );
     };
-
+    const imagesWallpapers = {
+        1: require("../../assets/testImages/1.jpg"),
+        2: require("../../assets/testImages/2.jpg"),
+        3: require("../../assets/testImages/3.png"),
+        4: require("../../assets/testImages/4.jpg"),
+        5: require("../../assets/testImages/5.jpg"),
+        6: require("../../assets/testImages/6.jpg"),
+        7: require("../../assets/testImages/7.jpg"),
+        8: require("../../assets/testImages/8.jpg"),
+        9: require("../../assets/testImages/9.jpg"),
+      } 
+      
     return(
         <Container style={styles.container}>  
         <Provider>        
@@ -90,8 +95,6 @@ const MainScreen = ({ navigation })=>{
                                         style={styles.iconSize}/>
                                 </Button>}>
                         
-                        <Menu.Item  onPress={buttonPopular} title="Populares" style={styles.menuItem}/>
-                        <Divider />
                         <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>
                         <Divider />
                         <Menu.Item onPress={buttonPrueba} title="Mostrar datos" style={styles.menuItem}/>
@@ -106,60 +109,26 @@ const MainScreen = ({ navigation })=>{
                </Button>
             </Header>
             <Content style={styles.provider}>
-            <View style={styles.view}>
-               <TouchableOpacity onPress={buttonPopular}> 
-                   <H1 style={styles.h1}>POPULARES</H1>
-                   </TouchableOpacity>
-                <TouchableOpacity onPress={buttonFavorites}> 
-                <H1 style={styles.h1}>FAVORITOS</H1>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={buttonVideogames}> 
-                <H1 style={styles.h1}>VIDEOJUEGOS</H1>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.viewRow}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/gato.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/libros.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/librosrojos.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            <View style={styles.viewRow}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/naruto.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/ojoSheikah.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/zeldaTriforce.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            <View style={styles.viewRow}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/busqueda.png")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/biblioteca.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/BOTW.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            </Content>
+            
+            <List>
+          {wallpapers
+            ? wallpapers.map((wallpaper) => (
+                <ListItem key={wallpaper.id.toString()}>
+                  <Text style={styles.textt}>{wallpaper.name}:</Text>
+                  <Card style={styles.cardItem}>
+           <Image source={imagesWallpapers[wallpaper.code]}
+                  style={styles.iconSize}/>
+                  {console.log(wallpaper.id)}
+        </Card>          
+                </ListItem>
+              ))
+            : null}
+        </List>
+        
+        
+      </Content>
+
+
             </Provider>
         </Container>
     );
@@ -181,6 +150,11 @@ const styles = StyleSheet.create({
         fontFamily: "Triforce",
         margin: "18%",
         fontSize: 35,
+    },
+    textt:{
+        color:"#FFFFFF",
+      fontSize:25,
+      fontFamily: "Triforce",
     },
     iconSize:{
         width: 30,
@@ -246,7 +220,28 @@ const styles = StyleSheet.create({
     },
     menu:{
         fontFamily: "Triforce",
-    }
+    },
 });
 
 export default MainScreen; 
+/*
+
+
+            <FlatList 
+        data={wallpapers}
+        keyExtractor={(wallpaperw) => wallpaperw.id}
+        ListEmptyComponent={<Text>¡No hay wallpapers :"c! {console.log(wallpapers)}</Text>}
+        renderItem={({ wallpaperw }) =>{
+            return(
+                <Card>
+                    
+                    <Image source={imagesWallpapers[wallpaperw.code]}
+                        style={styles.iconSize}
+                    />
+                </Card>
+            )
+        }}
+        />
+*/
+
+        

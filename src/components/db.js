@@ -54,12 +54,12 @@ const getWallpaperById = (id, setWallpaperFunc) => {
 
 
 // Agregar Wallpapers
-const addWallpapers = (name, route, tag, successFunc) => {
+const addWallpapers = (name, code, tag, successFunc) => {
   db.transaction(
     (tx) => {
-      tx.executeSql("insert into wallpapers (name, route, tag, date, status) values (?,?,?,?,?);", [
+      tx.executeSql("insert into wallpapers (name, code, tag, date, status) values (?,?,?,?,?);", [
         name,
-        route,
+        code,
         tag,
         getDate,
         "Nueva" 
@@ -101,7 +101,7 @@ const setupDatabaseTableAsync = async () => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists wallpapers (id integer primary key autoincrement, name text not null, route blob not null, tag text not null, date text not null, status text not null);"
+          "create table if not exists wallpapers (id integer primary key autoincrement, name text not null, code integer not null, tag text not null, date text not null, status text not null);"
         );
       },
       (_t, error) => {
@@ -122,9 +122,9 @@ const setupWallpapersAsync = async () => {
   return new Promise((resolve, reject) => {
     db.transaction(
       (tx) => {
-        tx.executeSql("insert into wallpapers (name, route, tag, date, status) values (?,?,?,?,?)", [
+        tx.executeSql("insert into wallpapers (name, code, tag, date, status) values (?,?,?,?,?)", [
           "gato",
-          "../../assets/testImages/gato.jpg",
+                1,
           "gato,felino,gatito",
           "12/11/2020",
           "NUEVA",

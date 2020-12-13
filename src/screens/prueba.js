@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import {
   Container,
   Content,
@@ -14,25 +14,25 @@ import {
 
 // Utilizar el contexto de notas
 import { WallpaperContext } from "../context/WallpaperContext";
-import getEnvVars from "../../environment";
-import { testImages } from "../../assets/";
-//import { Image } from 'react-native-elements';
-import { Image } from '@shoutem/ui';
 
-const { images, extJpg, extPng } = getEnvVars();
+
 const Prueba = ({ navigation }) => {
   const { wallpapers } = useContext(WallpaperContext);
   
   
-  // después de borrar todos los datos de la tabla ir a la pantalla useDatabase
-  // y quitar las barras // para la funcion await database.setupDatabaseTableAsync();
-  // presionar CTRL + S, eso para crear la tabla desde 0
-  // Después ir a db y actualizar presionando CTRL + s para que se borren los datos de la tabla
-  // ${wallpapers.name}
-  console.log(wallpapers);
- 
 
-  
+  console.log(wallpapers);
+  const imagesWallpapers = {
+    1: require("../../assets/testImages/1.jpg"),
+    2: require("../../assets/testImages/2.jpg"),
+    3: require("../../assets/testImages/3.png"),
+    4: require("../../assets/testImages/4.jpg"),
+    5: require("../../assets/testImages/5.jpg"),
+    6: require("../../assets/testImages/6.jpg"),
+    7: require("../../assets/testImages/7.jpg"),
+    8: require("../../assets/testImages/8.jpg"),
+    9: require("../../assets/testImages/9.jpg"),
+  } 
  
   
   return (
@@ -44,12 +44,10 @@ const Prueba = ({ navigation }) => {
                 <ListItem key={wallpaper.id.toString()}>
                   <Text style={styles.text}>{wallpaper.name}:</Text>
                   <Card style={styles.cardItem}>
-                    {console.log(wallpaper.route)}
-          
-           <Image source={{uri: `${wallpaper.route.toString()}`}}
+                    {console.log(wallpaper.code)}
+           <Image source={imagesWallpapers[wallpaper.code]}
                   style={styles.iconSize}/>
-        </Card>
-                  
+        </Card>          
                 </ListItem>
               ))
             : null}
@@ -67,7 +65,6 @@ const styles = StyleSheet.create({
     iconSize:{
       width: 100,
       height: 100,
-      alignItems: "stretch",
   },
 });
 

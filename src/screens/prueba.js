@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet } from "react-native";
 import {
   Container,
   Content,
@@ -10,12 +10,14 @@ import {
   Text,
   View,
   Card,
-  
 } from "native-base";
 
 // Utilizar el contexto de notas
 import { WallpaperContext } from "../context/WallpaperContext";
 import getEnvVars from "../../environment";
+import { testImages } from "../../assets/";
+//import { Image } from 'react-native-elements';
+import { Image } from '@shoutem/ui';
 
 const { images, extJpg, extPng } = getEnvVars();
 const Prueba = ({ navigation }) => {
@@ -29,7 +31,7 @@ const Prueba = ({ navigation }) => {
   // ${wallpapers.name}
   console.log(wallpapers);
  
-  let imagenWallpaper = `${wallpapers[1].route}`;
+
   
  
   
@@ -44,7 +46,7 @@ const Prueba = ({ navigation }) => {
                   <Card style={styles.cardItem}>
                     {console.log(wallpaper.route)}
           
-           <Image source={{uri: imagenWallpaper}}
+           <Image source={{uri: `${wallpaper.route.toString()}`}}
                   style={styles.iconSize}/>
         </Card>
                   
@@ -52,27 +54,6 @@ const Prueba = ({ navigation }) => {
               ))
             : null}
         </List>
-        <Fab
-          active={true}
-          position="bottomRight"
-          style={{ backgroundColor: "#ff0023" }}
-          direction="up"
-          onPress={() => {
-            navigation.navigate("addWallpaperScreen");
-          }}
-        >
-          <Icon name="plus" type="FontAwesome" />
-        </Fab>
-        <Card style={styles.cardItem}>
-           <Image source={require(`../../assets/testImages/biblioteca.jpg`)}
-                  style={styles.iconSize}/>
-        </Card>
-        <Card style={styles.cardItem}>
-                    {console.log(imagenWallpaper)}
-          
-           <Image source={{uri: imagenWallpaper}}
-                  style={styles.iconSize}/>
-        </Card>
         
       </Content>
     </Container>

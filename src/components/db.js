@@ -101,7 +101,7 @@ const setupDatabaseTableAsync = async () => {
     db.transaction(
       (tx) => {
         tx.executeSql(
-          "create table if not exists wallpapers (id integer primary key autoincrement, name text not null, route text not null, tag text not null, date text not null, status text not null);"
+          "create table if not exists wallpapers (id integer primary key autoincrement, name text not null, route blob not null, tag text not null, date text not null, status text not null);"
         );
       },
       (_t, error) => {

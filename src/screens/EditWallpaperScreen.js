@@ -33,7 +33,7 @@ import {  Container,
 
     const { wallpapers } = useContext(WallpaperContext);
 
-    console.log(wallpapers[1]['id']);
+    console.log(wallpapers);
 
     let [fontsLoaded] = useFonts({
       'Triforce': require("../../assets/fonts/Triforce.ttf")
@@ -43,13 +43,6 @@ import {  Container,
     const id=20;
 
     const handlerNewWallpaper = () =>{
-       // Este id debe cambiar, si es el mismo provoca error. añadir +1 
-                    
-                    // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
-                    // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio
-                    // autoincremente cuando se realice la inserción
-                    // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
-                    // la app
 
       if(!name){
         console.log("1");

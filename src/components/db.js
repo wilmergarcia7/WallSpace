@@ -73,24 +73,40 @@ const editWallpaper = (name, route, tag, resolution, id, successFunc) => {
   );
 };
 
-// Obtener la nota por el id
+/*// Obtener la nota por el id
 const getWallpaperById = (id, successFunc) => {
-  db.transaction((tx) => {
-    tx.executeSql(
-      "select * from wallpapers where id = ?",
-      [id],
-      (_, { rows: { _array } }) => {
-        setNoteFunc(_array);
-      },
-      (_t, error) => {
-        console.log("Error al obtener el wallpaper");
-        console.log(error);
-      },
-      (_t, _success) => {
-        successFunc;
-      }
-    );
-  });
+  db.transaction(
+    (tx) => {
+      tx.executeSql("select * from wallpapers where id = ?", [
+        id,
+      ]);
+    },
+    (_t, error) => {
+      console.log("Error al editar el wallpaper");
+      console.log(error);
+    },
+    (_t, _success) => {
+      successFunc;
+    }
+  );
+};*/
+
+// Eliminar Wallpapers por id
+const deleteWallpaperById = (id, successFunc) => {
+  db.transaction(
+    (tx) => {
+      tx.executeSql("DELETE FROM wallpapers WHERE id = ?", [
+        id,
+      ]);
+    },
+    (_t, error) => {
+      console.log("Error al Eliminar el wallpaper");
+      console.log(error);
+    },
+    (_t, _success) => {
+      successFunc;
+    }
+  );
 };
 
 // Borrar la base de datos
@@ -166,5 +182,5 @@ export const database = {
   dropDatabaseTableAsync,
   setupDatabaseTableAsync,
   setupWallpapersAsync,
-  getWallpaperById
+  deleteWallpaperById
 };

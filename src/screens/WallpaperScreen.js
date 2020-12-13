@@ -34,15 +34,15 @@ const wallpaperScreen = ({ navigation})=>{
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
                             <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
-                                <Image source={require("../../assets/icons/back.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
                             </Button>
                         </View>
                         <View style={{flexDirection: "row", marginLeft:"40%"}}>
                             <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/view.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/view.png")} style={styles.icon}/>
                             </Button>
                             <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/heart.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/heart.png")} style={styles.icon}/>
                             </Button>
                         </View>
                     </View>
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:"center",
     },
-    icono:{
+    icon:{
         height: 30,
         width: 30,
     },

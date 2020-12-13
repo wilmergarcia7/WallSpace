@@ -1,20 +1,11 @@
 import {  Container,
+    Content,
     Button,
-    Content, 
-    Spinner, 
-    Card, 
     Text,
   } from "native-base";
 import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
-
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-
 
 const wallpaperOptionsScreen = ({ navigation})=>{
 
@@ -40,15 +31,15 @@ const wallpaperOptionsScreen = ({ navigation})=>{
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
                             <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
-                                <Image source={require("../../assets/icons/back.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
                             </Button>
                         </View>
                         <View style={{flexDirection: "row", marginLeft:"40%"}}>
                             <Button style={styles.button} transparent onPress={() => navigation.navigate("EditWallpaperScreen",{})}>
-                                <Image source={require("../../assets/icons/edit.png")} style={styles.icono}/>
+                                <Image source={require("../../assets/icons/edit.png")} style={styles.icon}/>
                             </Button>
-                            <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/delete.png")} style={styles.icono}/>
+                            <Button style={styles.button} transparent onPress={() => navigation.navigate("deleteWallpaperScreen",{})}>
+                                <Image source={require("../../assets/icons/delete.png")} style={styles.icon}/>
                             </Button>
                         </View>
                     </View>
@@ -78,7 +69,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent:"center",
     },
-    icono:{
+    icon:{
         height: 30,
         width: 30,
     },
@@ -106,8 +97,10 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         marginTop: "2.5%",
-
     },
+    container: {
+        minHeight: 192,
+      },
 });
 
 export default wallpaperOptionsScreen;

@@ -50,12 +50,6 @@ const MainScreen = ({ navigation })=>{
         closeMenu();
     };
 
-
-    const buttonPrueba = () => {
-        navigation.navigate("prueba", {});
-        closeMenu();
-    };
-
     const buttonDrop = () => {
         navigation.navigate("eliminar", {});
         closeMenu();
@@ -70,15 +64,22 @@ const MainScreen = ({ navigation })=>{
         );
     };
     const imagesWallpapers = {
-        1: require("../../assets/testImages/1.jpg"),
-        2: require("../../assets/testImages/2.jpg"),
-        3: require("../../assets/testImages/3.png"),
-        4: require("../../assets/testImages/4.jpg"),
-        5: require("../../assets/testImages/5.jpg"),
-        6: require("../../assets/testImages/6.jpg"),
-        7: require("../../assets/testImages/7.jpg"),
-        8: require("../../assets/testImages/8.jpg"),
-        9: require("../../assets/testImages/9.jpg"),
+        1: require("../../assets/Wallpapers/1.jpg"),
+        2: require("../../assets/Wallpapers/2.jpg"),
+        3: require("../../assets/Wallpapers/3.png"),
+        4: require("../../assets/Wallpapers/4.jpg"),
+        5: require("../../assets/Wallpapers/5.jpg"),
+        6: require("../../assets/Wallpapers/6.jpg"),
+        7: require("../../assets/Wallpapers/7.jpg"),
+        8: require("../../assets/Wallpapers/8.jpg"),
+        9: require("../../assets/Wallpapers/9.jpg"),
+        10: require("../../assets/Wallpapers/10.jpg"),
+        11: require("../../assets/Wallpapers/11.jpg"),
+        12: require("../../assets/Wallpapers/12.jpg"),
+        13: require("../../assets/Wallpapers/13.jpg"),
+        14: require("../../assets/Wallpapers/14.png"),
+        15: require("../../assets/Wallpapers/15.png"),
+        16: require("../../assets/Wallpapers/16.jpg"),
       } 
       
     return(
@@ -95,9 +96,7 @@ const MainScreen = ({ navigation })=>{
                                         style={styles.iconSize}/>
                                 </Button>}>
                         
-                        <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>
-                        <Divider />
-                        <Menu.Item onPress={buttonPrueba} title="Mostrar datos" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>                        
                         <Divider />
                         <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                     </Menu>
@@ -108,25 +107,25 @@ const MainScreen = ({ navigation })=>{
                             style={styles.iconSize}/>
                </Button>
             </Header>
-            <Content style={styles.provider}>
             
-            <View style={styles.view}>
-          {wallpapers
-            ? wallpapers.map((wallpaper) => (
-                <View key={wallpaper.id.toString()} style={styles.cardItem}>
-                  <Text style={styles.textt}>{wallpaper.name}:</Text>
-                  <Card style={styles.cardItem}>
-                <Image source={imagesWallpapers[wallpaper.code]}
-                  style={styles.iconSize}/>
-                  {console.log(wallpaper.id)}
-                </Card>          
-                </View>
-              ))
-            : null}
-        </View>
+        <FlatList
+         
+        data={wallpapers}
+        numColumns={3}
+        columnWrapperStyle={{justifyContent:'space-between'}}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={<Text>¡No hay wallpapers :"c!</Text>}
+        renderItem={({ item }) =>{
+            return(
+                    <Card style={styles.card}>
+                    <Image source={imagesWallpapers[item.code]}
+                        style={styles.imageWallpaper}
+                    />
+                    </Card>
+            )
+        }}
+        />
         
-        
-      </Content>
 
 
             </Provider>
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
     },
     view:{
         flex:1,
-        flexDirection:"column",
+        
         alignItems:"center",
     },
     imageWallpaper:{
@@ -180,22 +179,13 @@ const styles = StyleSheet.create({
     },
     content: {
         backgroundColor: "#027373",
-        alignContent:"center",
+        alignContent:"flex-start",
         height: height,
         width: width,
     },
-    viewRow:{
-        backgroundColor:"#0D0D0D",
-        flexDirection:"row",
-        alignSelf:"center",       
-    },
-    cardItem:{
+    card:{
         backgroundColor:"#027373",
-        alignItems:"center",
         borderColor:"#027373",
-        padding:2,
-        marginLeft:5,
-        marginRight:5,
     },
     button:{
         backgroundColor:"#025159",
@@ -221,27 +211,11 @@ const styles = StyleSheet.create({
     menu:{
         fontFamily: "Triforce",
     },
+    back:{
+        backgroundColor: "#025159",
+    }
 });
 
 export default MainScreen; 
-/*
-
-
-            <FlatList 
-        data={wallpapers}
-        keyExtractor={(wallpaperw) => wallpaperw.id}
-        ListEmptyComponent={<Text>¡No hay wallpapers :"c! {console.log(wallpapers)}</Text>}
-        renderItem={({ wallpaperw }) =>{
-            return(
-                <Card>
-                    
-                    <Image source={imagesWallpapers[wallpaperw.code]}
-                        style={styles.iconSize}
-                    />
-                </Card>
-            )
-        }}
-        />
-*/
 
         

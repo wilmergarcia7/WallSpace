@@ -96,7 +96,7 @@ import {  Container,
               <Label style={styles.label}>Nombre</Label>
               <Input style={styles.input} value={name} onChangeText={setName}/>
             </Item>
-            
+            <Text>Códigos disponibles: 10, 11, 12, 13, 14, 15, 16</Text>
             <Item floatingLabel style={styles.item}>
               <Label style={styles.label}>Código</Label>
               <Input style={styles.input} value={code} onChangeText={setCode}/>

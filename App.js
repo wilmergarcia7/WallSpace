@@ -2,7 +2,6 @@ import React from "react";
 import mainScreen from "./src/screens/mainScreen";
 import SearchScreen from "./src/screens/SearchScreen";
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
-import prueba from "./src/screens/prueba";
 import  DropScreen  from "./src/screens/DropScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
@@ -25,10 +24,9 @@ export default function App() {
       <WallpaperContextProvider>
       <Stack.Navigator initialRouteName="mainScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="searchScreen" component={SearchScreen} />
-        <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} />
-        <Stack.Screen name="prueba" component={prueba} />
-        <Stack.Screen name="eliminar" component={DropScreen} />
+        <Stack.Screen name="searchScreen" component={SearchScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="eliminar" component={DropScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
       </WallpaperContextProvider>
     </NavigationContainer>

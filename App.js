@@ -1,21 +1,13 @@
 import React from "react";
 import mainScreen from "./src/screens/mainScreen";
 import SearchScreen from "./src/screens/SearchScreen";
-<<<<<<< HEAD
 import WallpaperScreen from "./src/screens/WallpaperScreen";
-import FavoritesScreen from "./src/screens/FavoritesScreen";
-import PopularScreen from "./src/screens/PopularScreen";
-import VideogamesScreen from "./src/screens/VideogamesScreen";
-import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
-import prueba from "./src/screens/prueba";
 import myWallpaper from "./src/screens/myWallpaper";
 import WallpaperOptionsScreen from "./src/screens/WallpaperOptionsScreen"
 import EditWallpaperScreen from "./src/screens/EditWallpaperScreen";
 import deleteWallpaperScreen from "./src/screens/deleteWallpaperScreen";
-=======
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
->>>>>>> devWilmer
-import  DropScreen  from "./src/screens/DropScreen";
+import DropScreen  from "./src/screens/DropScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
 import { NavigationContainer } from "@react-navigation/native";
@@ -37,24 +29,14 @@ export default function App() {
       <WallpaperContextProvider>
       <Stack.Navigator initialRouteName="mainScreen">
         <Stack.Screen name="mainScreen" component={mainScreen} options={{headerShown:false}}/>
-<<<<<<< HEAD
-        <Stack.Screen name="searchScreen" component={SearchScreen} />
-        <Stack.Screen name="favoritesScreen" component={FavoritesScreen} />
-        <Stack.Screen name="popularScreen" component={PopularScreen} />
-        <Stack.Screen name="gamesScreen" component={VideogamesScreen} />
-        <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} />
-        <Stack.Screen name="prueba" component={prueba} />
-        <Stack.Screen name="eliminar" component={DropScreen} />
         <Stack.Screen name="WallpaperScreen" component={WallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="myWallpaper" component={myWallpaper} options={{headerShown:false}}/>
         <Stack.Screen name="EditWallpaperScreen" component={EditWallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="WallpaperOptionsScreen" component={WallpaperOptionsScreen} options={{headerShown:false}}/>
         <Stack.Screen name="deleteWallpaperScreen" component={deleteWallpaperScreen} options={{headerShown:false}}/>
-=======
         <Stack.Screen name="searchScreen" component={SearchScreen} options={{headerShown:false}}/>
         <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="eliminar" component={DropScreen} options={{headerShown:false}}/>
->>>>>>> devWilmer
       </Stack.Navigator>
       </WallpaperContextProvider>
     </NavigationContainer>

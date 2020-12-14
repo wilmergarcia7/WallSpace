@@ -6,23 +6,58 @@ import {  Container,
     Text,
   } from "native-base";
 import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
+import { WallpaperContext } from "../context/WallpaperContext";
 
 
-const wallpaperScreen = ({ navigation})=>{
+const wallpaperScreen = ({ navigation, route})=>{
 
     // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
     const { width, height } = Dimensions.get("window");
+
+    const wallpaperContext = useContext(WallpaperContext);
+    const { getWallpaperById, refreshWallpapers, setWallpaper, wallpaper } = wallpaperContext;
+
+    const {code} = route.params;
+
+
+    //const prueba = 
+
+     // Hook de efecto
+    useEffect(() => {
+        getWallpaperById(code, setWallpaper);
+        console.log(wallpaper);
+    }, []);
+
 
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
     });
 
+    const imagesWallpapers = {
+        1: require("../../assets/Wallpapers/1.jpg"),
+        2: require("../../assets/Wallpapers/2.jpg"),
+        3: require("../../assets/Wallpapers/3.png"),
+        4: require("../../assets/Wallpapers/4.jpg"),
+        5: require("../../assets/Wallpapers/5.jpg"),
+        6: require("../../assets/Wallpapers/6.jpg"),
+        7: require("../../assets/Wallpapers/7.jpg"),
+        8: require("../../assets/Wallpapers/8.jpg"),
+        9: require("../../assets/Wallpapers/9.jpg"),
+        10: require("../../assets/Wallpapers/10.jpg"),
+        11: require("../../assets/Wallpapers/11.jpg"),
+        12: require("../../assets/Wallpapers/12.jpg"),
+        13: require("../../assets/Wallpapers/13.jpg"),
+        14: require("../../assets/Wallpapers/14.png"),
+        15: require("../../assets/Wallpapers/15.png"),
+        16: require("../../assets/Wallpapers/16.jpg"),
+    } 
+
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Image source={require("../../assets/testImages/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
             </View>
         );
     };
@@ -30,7 +65,7 @@ const wallpaperScreen = ({ navigation})=>{
     return(
         <Container>
             <Content>
-                <ImageBackground source={require("../../assets/testImages/113021.png")} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
+                {/*<ImageBackground source={imagesWallpapers(wallpaper[1].code)} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
                             <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
@@ -55,7 +90,7 @@ const wallpaperScreen = ({ navigation})=>{
                     <Text style={styles.infomation}>NOMBRE: Zelda </Text>
                     <Text style={styles.infomation}>AUTOR: Wilmer Garcia</Text> 
                     <Text style={styles.infomation}>FECHA: 04/12/2020</Text> 
-                </View>
+                </View>*/}
             </Content>
         </Container>
     );

@@ -37,7 +37,7 @@ import {  Container,
 
 
      // Cargar la fuente de manera asíncrona
-  useEffect(() => {
+    useEffect(() => {
     const loadFontsAsync = async () => {
       await Font.loadAsync({
         Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
@@ -50,27 +50,13 @@ import {  Container,
     loadFontsAsync();
   }, []);
 
-    
-    
 
-<<<<<<< HEAD
-    const handlerNewWallpaper = () =>{
-      const id=20; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
-                    
-                    // Después de agregar los datos, ir a bd.js y actualizar con CTRL + S
-                    // de esa forma se actualizan los datos en la pantalla de mostrar info del inicio
-                    // autoincremente cuando se realice la inserción
-                    // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
-                    // la app
-      addNewWallpaper(id, name, route, tag, resolution, refreshWallpapers);
-=======
     useEffect(() => {
       if (name&&code&&tag) {
       setEnableSave(false);
       }
       else setEnableSave(true);
     }, [name, code, tag]);
->>>>>>> devWilmer
 
 
     const handlerNewWallpaper = async () =>{

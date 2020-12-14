@@ -32,7 +32,7 @@ const deleteWallpaper = ({ navigation, id})=>{
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Image source={require("../../assets/testImages/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
             </View>
         );
     };

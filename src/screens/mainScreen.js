@@ -29,8 +29,6 @@ const MainScreen = ({ navigation })=>{
     const wallpaperContext = useContext(WallpaperContext);
     const { wallpapers } = wallpaperContext;
     
-
-
     const [visible, setVisible] = React.useState(false);
     const openMenu = () => setVisible(true);
 
@@ -49,21 +47,17 @@ const MainScreen = ({ navigation })=>{
         navigation.navigate("addWallpaperScreen", {});
         closeMenu();
     };
+    const buttonMyWallpaper = () => {
+        navigation.navigate("myWallpaper", {});
+        closeMenu();
+    };
 
     const buttonDrop = () => {
         navigation.navigate("eliminar", {});
         closeMenu();
     };
 
-<<<<<<< HEAD
-    const buttonMyWallpaper = () => {
-        navigation.navigate("myWallpaper", {});
-        closeMenu();
-    };
-
-=======
    
->>>>>>> devWilmer
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -108,7 +102,7 @@ const MainScreen = ({ navigation })=>{
                         <Divider />
                         <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                         <Divider />
-                        <Menu.Item onPress={buttonMyWallpaper} title="Mis Wallpaper" style={styles.menuItem}/>
+                        <Menu.Item onPress={buttonMyWallpaper} title="Mis Wallpapers" style={styles.menuItem}/>
                     </Menu>
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    
@@ -117,65 +111,6 @@ const MainScreen = ({ navigation })=>{
                             style={styles.iconSize}/>
                </Button>
             </Header>
-<<<<<<< HEAD
-            <Content style={styles.provider}>
-            <View style={styles.view}>
-               <TouchableOpacity onPress={buttonPopular}> 
-                   <H1 style={styles.h1}>POPULARES</H1>
-                   </TouchableOpacity>
-                <TouchableOpacity onPress={buttonFavorites}> 
-                <H1 style={styles.h1}>FAVORITOS</H1>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={buttonVideogames}> 
-                <H1 style={styles.h1}>VIDEOJUEGOS</H1>
-                </TouchableOpacity>
-            </View>
-            <View style={styles.viewRow}>
-                <TouchableOpacity onPress={() => navigation.navigate("WallpaperScreen",{})}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/gato.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                </TouchableOpacity>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/libros.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/librosrojos.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            <View style={styles.viewRow}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/naruto.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/ojoSheikah.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/zeldaTriforce.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            <View style={styles.viewRow}>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/busqueda.png")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/biblioteca.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-                <Card style={styles.cardItem}>
-                    <Image  source={require("../../assets/testImages/BOTW.jpg")} 
-                            style={styles.imageWallpaper}/>
-                </Card>
-            </View>
-            </Content>
-=======
             
         <FlatList
          
@@ -186,18 +121,17 @@ const MainScreen = ({ navigation })=>{
         ListEmptyComponent={<Text>¡No hay wallpapers :"c!</Text>}
         renderItem={({ item }) =>{
             return(
+                <TouchableOpacity onPress={() => navigation.navigate("WallpaperScreen",{code: item.code})}>
                     <Card style={styles.card}>
                     <Image source={imagesWallpapers[item.code]}
                         style={styles.imageWallpaper}
                     />
                     </Card>
+                </TouchableOpacity>
             )
         }}
         />
-        
 
-
->>>>>>> devWilmer
             </Provider>
         </Container>
     );
@@ -287,5 +221,3 @@ const styles = StyleSheet.create({
 });
 
 export default MainScreen; 
-
-        

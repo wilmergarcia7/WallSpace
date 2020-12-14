@@ -31,27 +31,6 @@ const getWallpapers = (setWallpapersFunc) => {
   });
 };
 
-// Obtener la nota por el id
-const getWallpaperById = (id, setWallpaperFunc) => {
-  db.transaction((tx) => {
-    tx.executeSql(
-      "select * from wallpaper where id = ?",
-      [id],
-      (_, { rows: { _array } }) => {
-        setWallpaperFunc(_array);
-      },
-      (_t, error) => {
-        console.log("Error al momento de obtener el wallpaper");
-        console.log(error);
-      },
-      (_t, _success) => {
-        console.log("Wallpaper obtenido");
-      }
-    );
-  });
-};
-
-
 
 // Agregar Wallpapers
 const addWallpapers = (name, code, tag, successFunc) => {
@@ -99,23 +78,25 @@ const editWallpaper = (name, route, tag, resolution, id, successFunc) => {
   );
 };
 
-/*// Obtener la nota por el id
-const getWallpaperById = (id, successFunc) => {
-  db.transaction(
-    (tx) => {
-      tx.executeSql("select * from wallpapers where id = ?", [
-        id,
-      ]);
-    },
-    (_t, error) => {
-      console.log("Error al editar el wallpaper");
-      console.log(error);
-    },
-    (_t, _success) => {
-      successFunc;
-    }
-  );
-};*/
+
+const getWallpaperById = (code,setWallpapersFunc) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "select * from wallpapers where code = ?",
+      [code],
+      (_, { rows: { _array } }) => {
+        setWallpapersFunc(_array);
+      },
+      (_t, error) => {
+        console.log("Error al momento de obtener los wallpaper");
+        console.log(error);
+      },
+      (_t, _success) => {
+        console.log("Wallpaper obtenidos");
+      }
+    );
+  });
+};
 
 // Eliminar Wallpapers por id
 const deleteWallpaperById = (id, successFunc) => {
@@ -209,9 +190,6 @@ export const database = {
   dropDatabaseTableAsync,
   setupDatabaseTableAsync,
   setupWallpapersAsync,
-<<<<<<< HEAD
-  deleteWallpaperById
-=======
+  deleteWallpaperById,
   getWallpaperById,
->>>>>>> devWilmer
 };

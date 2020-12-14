@@ -22,10 +22,6 @@ export const WallpaperContextProvider = (props) => {
     return database.getWallpapers(setWallpapers);
   };
 
-<<<<<<< HEAD
-  const addNewWallpaper = (id, name, route, tag, resolution, successFunc) => {
-    return database.addWallpapers(id, name, route, tag, resolution, refreshWallpapers);
-  };
   const editWallpaper = (name, route, tag, resolution, id) => {
     return database.editWallpaper(name, route, tag, resolution, id, refreshWallpapers);
   };
@@ -35,25 +31,25 @@ export const WallpaperContextProvider = (props) => {
   const deleteWallpaperById = (id) => {
     return database.deleteWallpaperById(id, refreshWallpapers);
   };
-  const dropWallpaper = () =>{
-  return database.dropDatabaseTableAsync();
-=======
+
   const addNewWallpaper = async (name, code, tag) => {
     await database.addWallpapers(name,  code, tag, refreshWallpapers);
     return refreshWallpapers();
->>>>>>> devWilmer
   };
 
   const dropWallpaper = async () =>{
   await database.dropDatabaseTableAsync();
   return refreshWallpapers();
   };
+
   const getAllWallpapers = async () =>{
     await database.getWallpapers();
     return refreshWallpapers();
   }
-  const getWallpaperById = (id) =>{
-    return database.getWallpaperById(id, setWallpaper);
+
+  const getWallpaperById = async (code) =>{
+    await database.getWallpaperById(code, setWallpaper);
+    return refreshWallpapers();
   };
 
   // Crear el objeto de contexto
@@ -62,14 +58,12 @@ export const WallpaperContextProvider = (props) => {
     wallpaper,
     addNewWallpaper,
     dropWallpaper,
-<<<<<<< HEAD
-    chargeDB,
     editWallpaper,
-    deleteWallpaperById
-=======
+    deleteWallpaperById,
     getWallpaperById,
     getAllWallpapers,
->>>>>>> devWilmer
+    setWallpaper,
+    refreshWallpapers,
   };
 
   // Pasar los valores al proveedor y retornarlo

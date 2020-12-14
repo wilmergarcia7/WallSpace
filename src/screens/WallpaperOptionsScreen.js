@@ -19,7 +19,7 @@ const wallpaperOptionsScreen = ({ navigation})=>{
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Image source={require("../../assets/testImages/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
             </View>
         );
     };
@@ -27,7 +27,7 @@ const wallpaperOptionsScreen = ({ navigation})=>{
     return(
         <Container>
             <Content>
-                <ImageBackground source={require("../../assets/testImages/113021.png")} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
+                {/*<ImageBackground source={require("../../assets/testImages/113021.png")} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
                             <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
@@ -52,7 +52,7 @@ const wallpaperOptionsScreen = ({ navigation})=>{
                     <Text style={styles.infomation}>NOMBRE: Zelda </Text>
                     <Text style={styles.infomation}>AUTOR: Wilmer Garcia</Text> 
                     <Text style={styles.infomation}>FECHA: 04/12/2020</Text> 
-                </View>
+                </View>*/}
             </Content>
         </Container>
     );

@@ -11,32 +11,49 @@ import {  Container,
     Text, 
     CardItem,
     Form,
-    Label 
+    Label,
+    Button 
   } from "native-base";
   import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
-  import { useFonts } from "expo-font";
+  //import { useFonts } from "expo-font";
   import { TouchableOpacity } from "react-native-gesture-handler";
-  import {  Button} from 'react-native-paper';
+//  import {  Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
+  import * as Font from "expo-font";
   
   const { width, height } = Dimensions.get("window");
   
   const AddWallpaperScreen = ({navigation})=>{
     
     const [name, setName] = useState("");
-    const [route, setRoute] = useState("");
+    const [code, setCode] = useState("");
     const [tag, setTag] = useState("");
-    const [resolution, setResolution] = useState("");
+    const [fontsLoaded, setFontsLoaded] = useState(false);
+    const [enableSave, setEnableSave] = useState(true);
+    const [errorWallpaper, setErrorWallpaper] = useState(false);
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, addNewWallpaper, refreshWallpapers } = wallpaperContext;
+    const { addNewWallpaper, refreshWallpapers } = wallpaperContext;
 
 
-    let [fontsLoaded] = useFonts({
-      'Triforce': require("../../assets/fonts/Triforce.ttf")
-      
-    });
+     // Cargar la fuente de manera asíncrona
+  useEffect(() => {
+    const loadFontsAsync = async () => {
+      await Font.loadAsync({
+        Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+        'Triforce': require("../../assets/fonts/Triforce.ttf")
+      }).then(() => {
+        setFontsLoaded(true);
+      });
+    };
 
+    loadFontsAsync();
+  }, []);
+
+    
+    
+
+<<<<<<< HEAD
     const handlerNewWallpaper = () =>{
       const id=20; // Este id debe cambiar, si es el mismo provoca error. añadir +1 
                     
@@ -46,21 +63,39 @@ import {  Container,
                     // Buscar altrenativa para que la bd se actualice sin necesidad de reiniciar
                     // la app
       addNewWallpaper(id, name, route, tag, resolution, refreshWallpapers);
+=======
+    useEffect(() => {
+      if (name&&code&&tag) {
+      setEnableSave(false);
+      }
+      else setEnableSave(true);
+    }, [name, code, tag]);
+>>>>>>> devWilmer
 
-      // Regresar a la pantalla anterior
-      navigation.goBack();
+
+    const handlerNewWallpaper = async () =>{
+      
+      if (name&&code&&tag){     
+        await addNewWallpaper(name, code, tag, refreshWallpapers);
+
+        // Regresar a la pantalla anterior
+        navigation.goBack();
+      } else {
+        setErrorWallpaper(true);
+      }
+      
+      
     };    
  
-  
   if(!fontsLoaded){
           return(
               <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
               <Spinner color="yellow"/>
               </View>
           );
-      };
+   };
   
-      return(
+        return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
                 <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
@@ -73,23 +108,22 @@ import {  Container,
               <Label style={styles.label}>Nombre</Label>
               <Input style={styles.input} value={name} onChangeText={setName}/>
             </Item>
-            
+            <Text>Códigos disponibles: 10, 11, 12, 13, 14, 15, 16</Text>
             <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Ruta</Label>
-              <Input style={styles.input} value={route} onChangeText={setRoute}/>
+              <Label style={styles.label}>Código</Label>
+              <Input style={styles.input} value={code} onChangeText={setCode}/>
             </Item>
            
             <Item floatingLabel style={styles.item}>
               <Label style={styles.label}>Etiquetas</Label>
               <Input style={styles.input} value={tag} onChangeText={setTag}/>
             </Item>
-           
-            <Item floatingLabel style={styles.item}>
-              <Label style={styles.label}>Resolución</Label>
-              <Input style={styles.input} value={resolution} onChangeText={setResolution}/>
-            </Item> 
+        
             </Form>
-            <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
+            <Button style={enableSave ? styles.buttonError : styles.button} 
+                    onPress={handlerNewWallpaper}
+                    disabled={enableSave}
+                    >
               <Text style={styles.text}>Agregar</Text>
               </Button>
             </Content>
@@ -143,12 +177,17 @@ import {  Container,
       fontFamily: "Triforce",
     },
     button:{
-      marginLeft:"25%",
-      marginRight:"25%",
-      marginTop:"8%",
+      fontFamily: "Triforce",
+      alignSelf: "center",
+      marginTop: 10,
       backgroundColor:"#025159",
+      
+    },
+    buttonError:{
+      fontFamily: "Triforce",
+      alignSelf: "center",
+      marginTop: 10,
     }
-    
   });
   
   export default AddWallpaperScreen; 

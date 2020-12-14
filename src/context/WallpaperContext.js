@@ -11,6 +11,7 @@ export const WallpaperContextProvider = (props) => {
 
   // Almacenar los valores en el estado
   const [wallpapers, setWallpapers] = useState(initialWallpapers);
+  const [wallpaper, setWallpaper] = useState("");
 
   // Cargar u obtener los wallpapers
   useEffect(() => {
@@ -21,6 +22,7 @@ export const WallpaperContextProvider = (props) => {
     return database.getWallpapers(setWallpapers);
   };
 
+<<<<<<< HEAD
   const addNewWallpaper = (id, name, route, tag, resolution, successFunc) => {
     return database.addWallpapers(id, name, route, tag, resolution, refreshWallpapers);
   };
@@ -35,19 +37,39 @@ export const WallpaperContextProvider = (props) => {
   };
   const dropWallpaper = () =>{
   return database.dropDatabaseTableAsync();
+=======
+  const addNewWallpaper = async (name, code, tag) => {
+    await database.addWallpapers(name,  code, tag, refreshWallpapers);
+    return refreshWallpapers();
+>>>>>>> devWilmer
   };
 
-  const chargeDB = () =>{
-    return database.getWallpapers();
+  const dropWallpaper = async () =>{
+  await database.dropDatabaseTableAsync();
+  return refreshWallpapers();
   };
+  const getAllWallpapers = async () =>{
+    await database.getWallpapers();
+    return refreshWallpapers();
+  }
+  const getWallpaperById = (id) =>{
+    return database.getWallpaperById(id, setWallpaper);
+  };
+
   // Crear el objeto de contexto
   const wallpaperContext = {
     wallpapers,
+    wallpaper,
     addNewWallpaper,
     dropWallpaper,
+<<<<<<< HEAD
     chargeDB,
     editWallpaper,
     deleteWallpaperById
+=======
+    getWallpaperById,
+    getAllWallpapers,
+>>>>>>> devWilmer
   };
 
   // Pasar los valores al proveedor y retornarlo

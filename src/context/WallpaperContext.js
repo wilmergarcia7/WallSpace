@@ -51,6 +51,10 @@ export const WallpaperContextProvider = (props) => {
     await database.getWallpaperById(code, setWallpaper);
     return refreshWallpapers();
   };
+  const getWallpaperByName = async (name) =>{
+    await database.getWallpaperByName(name, setWallpaper);
+    return refreshWallpapers();
+  };
 
   // Crear el objeto de contexto
   const wallpaperContext = {
@@ -64,6 +68,7 @@ export const WallpaperContextProvider = (props) => {
     getAllWallpapers,
     setWallpaper,
     refreshWallpapers,
+    getWallpaperByName,
   };
 
   // Pasar los valores al proveedor y retornarlo

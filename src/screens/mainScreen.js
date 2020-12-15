@@ -17,7 +17,7 @@ const { width, height } = Dimensions.get("window");
 
 const MainScreen = ({ navigation })=>{
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, wallpaper, getWallpaperById, refreshWallpapers } = wallpaperContext;
+    const { wallpapers} = wallpaperContext;
     
     const [visible, setVisible] = React.useState(false);
     const openMenu = () => setVisible(true);
@@ -39,11 +39,6 @@ const MainScreen = ({ navigation })=>{
     };
     const buttonMyWallpaper = () => {
         navigation.navigate("myWallpaper", {});
-        closeMenu();
-    };
-
-    const buttonDrop = () => {
-        navigation.navigate("eliminar", {});
         closeMenu();
     };
 
@@ -73,12 +68,7 @@ const MainScreen = ({ navigation })=>{
         15: require("../../assets/Wallpapers/15.png"),
         16: require("../../assets/Wallpapers/16.jpg"),
       } 
-      let numero = 1
-      
-      
-      let prueba = require(`../../assets/Wallpapers/1.jpg`)
-      let imagen
-      
+          
     return(
         <Container style={styles.container}>  
         <Provider>        
@@ -91,10 +81,7 @@ const MainScreen = ({ navigation })=>{
                                 <Button style={styles.button} onPress={openMenu}>
                                 <Image  source={require("../../assets/icons/menu-button.png")}
                                         style={styles.iconSize}/>
-                                </Button>}>
-                        
-                        <Menu.Item onPress={buttonDrop} title="Eliminar" style={styles.menuItem}/>                        
-                        <Divider />
+                                </Button>}>                
                         <Menu.Item onPress={buttonAddWallpaper} title="Añadir Wallpaper" style={styles.menuItem}/>
                         <Divider />
                         <Menu.Item onPress={buttonMyWallpaper} title="Mis Wallpapers" style={styles.menuItem}/>
@@ -129,11 +116,6 @@ const MainScreen = ({ navigation })=>{
             )
         }}
         />
-        <View>
-        <Image source={prueba}
-                        style={styles.imageWallpaper}
-                    />
-        </View>
         
             </Provider>
         </Container>

@@ -7,7 +7,8 @@ import {  Container,
     Text,
     Form,
     Label,
-    Button 
+    Button,
+    Card 
   } from "native-base";
   import { StyleSheet, Image, View, ImageBackground, Dimensions, FlatList,SafeAreaView } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
@@ -142,7 +143,7 @@ import {  Container,
         return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+              <Button transparent onPress={() => navigation.goBack()}>
                 <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
               </Button>
               <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
@@ -168,7 +169,7 @@ import {  Container,
         }}
         />
         </SafeAreaView>
-            <H1 style={styles.h1}>Elija una imagen de la galería, escriba un nombre, 
+            <H1 style={styles.textInstruction}>Elija una imagen de la arriba, escriba un nombre, 
                                   escriba el código de la imagen seleccionada, y Etiquetas
                                   que representen a la imagen.</H1>
             <Content>
@@ -205,7 +206,8 @@ import {  Container,
     container: {
         backgroundColor:"#0D0D0D",
         flex: 1,
-        
+        width: width,
+        height: height,
     },
     header:{     
         alignItems: "center",
@@ -215,7 +217,7 @@ import {  Container,
     textHeader:{
         color: "#ffffff",
         fontFamily: "Triforce",
-        margin: "14%",
+        marginLeft: "19%",
         fontSize: 35,
     },
     label:{
@@ -272,7 +274,12 @@ import {  Container,
   card:{
     backgroundColor:"#027373",
     borderColor:"#027373",
-},
+  },
+  textInstruction:{
+    color:"#FFFFFF",
+    fontSize:20,
+    fontFamily: "Triforce",
+  },
   });
   
   export default AddWallpaperScreen; 

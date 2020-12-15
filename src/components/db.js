@@ -77,7 +77,7 @@ const editWallpaper = (name, tag, id, successFunc) => {
   );
 };
 
-
+// obtener wallpaper por código
 const getWallpaperById = (code,setWallpapersFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -96,6 +96,27 @@ const getWallpaperById = (code,setWallpapersFunc) => {
     );
   });
 };
+
+// obtener wallpaper por nombre
+const getWallpaperById = (name,setWallpapersFunc) => {
+  db.transaction((tx) => {
+    tx.executeSql(
+      "select * from wallpapers where name = ?",
+      [name],
+      (_, { rows: { _array } }) => {
+        setWallpapersFunc(_array);
+      },
+      (_t, error) => {
+        console.log("Error al momento de obtener los wallpaper");
+        console.log(error);
+      },
+      (_t, _success) => {
+        console.log("Wallpaper obtenidos");
+      }
+    );
+  });
+};
+
 
 // Eliminar Wallpapers por id
 const deleteWallpaperById = (id, successFunc) => {

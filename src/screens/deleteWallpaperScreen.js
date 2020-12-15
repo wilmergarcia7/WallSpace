@@ -9,27 +9,44 @@ import { useFonts } from "expo-font";
 import { Card } from "react-native-paper";
 import { WallpaperContext } from "../context/WallpaperContext";
 
-const deleteWallpaper = ({ navigation, id})=>{
+const deleteWallpaper = ({ navigation, route})=>{
 
-    // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
-    const { width, height } = Dimensions.get("window");
+    const [theWallpaper, setTheWallpaper] = useState(null);
+    const [id, setid] = useState(false);
 
     const wallpaperContext = useContext(WallpaperContext);
-    const { deleteWallpaperById, refreshWallpapers } = wallpaperContext;
+    const { getWallpaperById, refreshWallpapers, deleteWallpaperById, wallpaper } = wallpaperContext;
+
+    const {code} = route.params;
+
+    // Hook de efecto
+    useEffect(() => {
+        const getWallpapaer = () =>{
+            getWallpaperById(code);
+        };
+
+        getWallpapaer();
+
+        if(wallpaper.length){
+            setTheWallpaper(wallpaper[0].code);
+            setid(wallpaper[0].id);
+            console.log(theWallpaper);
+        }
+    }, [code,id]);
 
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
     });
 
     const handlerDeleteWallpaper = () =>{
-        const id = 19;
-        deleteWallpaperById(id, refreshWallpapers);
+        console.log(wallpaper[0].id);
+        deleteWallpaperById(wallpaper[0].id, refreshWallpapers);
   
         // Regresar a la pantalla anterior
-        navigation.goBack();
+        navigation.navigate("myWallpaper", {});
       };    
 
-    if(!fontsLoaded){
+    if(!fontsLoaded || !wallpaper){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
             <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>

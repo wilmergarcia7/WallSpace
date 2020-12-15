@@ -56,14 +56,13 @@ const addWallpapers = (name, code, tag, successFunc) => {
 };
 
 // editar Wallpapers
-const editWallpaper = (name, route, tag, resolution, id, successFunc) => {
+const editWallpaper = (name, tag, id, successFunc) => {
   db.transaction(
     (tx) => {
-      tx.executeSql("update wallpapers set name = ?, route = ?, tag = ?, resolution = ?, status = ? where id = ?", [
+      tx.executeSql("update wallpapers set name = ?, tag = ?, date = ?, status = ? where id = ?", [
         name,
-        route,
         tag,
-        resolution,
+        getDate,
         "EDITADA",
         id,
       ]);

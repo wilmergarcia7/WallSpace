@@ -52,9 +52,9 @@ import {  Container,
 
     if(!fontsLoaded){
           return(
-              <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-              <Spinner color="yellow"/>
-              </View>
+            <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+            </View>
           );
       };
 
@@ -63,6 +63,9 @@ import {  Container,
         <Container style={styles.container}>  
             <Provider>        
                 <Header style={styles.header}>
+                    <Button transparent onPress={() => navigation.goBack()}>
+                        <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
+                    </Button>
                     <Text style={styles.text}>Mis Walpapers</Text>
                 </Header>
                 
@@ -75,7 +78,7 @@ import {  Container,
                 ListEmptyComponent={<Text>¡No hay wallpapers :"c!</Text>}
                 renderItem={({ item }) =>{
                     return(
-                        <TouchableOpacity onPress={() => navigation.navigate("WallpaperOptionsScreen",{})}>
+                        <TouchableOpacity onPress={() => navigation.navigate("WallpaperOptionsScreen",{code: item.code})}>
                             <Card style={styles.card}>
                             <Image source={imagesWallpapers[item.code]}
                                 style={styles.imageWallpaper}
@@ -171,7 +174,11 @@ import {  Container,
     },
     back:{
         backgroundColor: "#025159",
-    }
+    },
+    icon:{
+        height: 30,
+        width: 30,
+    },
 });
   
   export default myWallpaperScreen; 

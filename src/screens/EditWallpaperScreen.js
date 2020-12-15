@@ -14,64 +14,67 @@ import {  Container,
     Label,
     ListItem,
   } from "native-base";
-  import { StyleSheet, View, Dimensions } from "react-native";
-  import React, { useContext, useState } from "react";
+  import { StyleSheet, View, Dimensions, Image } from "react-native";
+  import React, { useContext, useState, useEffect } from "react";
   import { useFonts } from "expo-font";
   import { Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
 
   const { width, height } = Dimensions.get("window");
   
-  const editWallpaperScreen = ({navigation})=>{
+  const editWallpaperScreen = ({navigation, route})=>{
     
     const [name, setName] = useState("");
-    const [route, setRoute] = useState("");
     const [tag, setTag] = useState("");
-    const [resolution, setResolution] = useState("");
+    const [theWallpaper, setTheWallpaper] = useState(null);
+    const [id, setid] = useState(false);
     const wallpaperContext = useContext(WallpaperContext);
-    const { refreshWallpapers, editWallpaper } = wallpaperContext;
+    const { getWallpaperById, refreshWallpapers, editWallpaper, wallpaper } = wallpaperContext;
 
-    const { wallpapers } = useContext(WallpaperContext);
-
-    console.log(wallpapers);
+    const {code} = route.params;
 
     let [fontsLoaded] = useFonts({
       'Triforce': require("../../assets/fonts/Triforce.ttf")
       
     });
 
-    const id=20;
+    // Hook de efecto
+    useEffect(() => {
+      const getWallpapaer = () =>{
+          getWallpaperById(code);
+      };
+
+      getWallpapaer();
+
+      if(wallpaper.length){
+          setTheWallpaper(wallpaper[0].code);
+          setid(wallpaper[0].id);
+          console.log(theWallpaper);
+      }
+  }, [code,id]);
 
     const handlerNewWallpaper = () =>{
 
       if(!name){
-        console.log("1");
-        editWallpaper(wallpapers[0]['name'], route, tag, resolution, id, refreshWallpapers);
-      }
-      if(!route){
-        console.log("1");
-        editWallpaper(name, wallpapers[0]['route'], tag, resolution, id, refreshWallpapers);
+        editWallpaper(wallpaper[0]['name'], tag, id, refreshWallpapers);
       }
       if(!tag){
-        console.log("1");
-        editWallpaper(name, route, wallpapers[0]['tag'], resolution, id, refreshWallpapers);
+        editWallpaper(name, wallpaper[0]['tag'], id, refreshWallpapers);
       }
-      if(!resolution){
-        console.log("1");
-        editWallpaper(name, route, tag, wallpapers[0]['resolution'], id, refreshWallpapers);
+      else{
+        editWallpaper(name, tag, id, refreshWallpapers);
       }
-      //editWallpaper(name, route, tag, resolution, id, refreshWallpapers);
 
-      // Regresar a la pantalla anterior
-      navigation.goBack();
+      // Regresar a mis Wallpapers
+      navigation.navigate("myWallpaper", {});
     };    
  
   
-  if(!fontsLoaded || !wallpapers){
+  if(!fontsLoaded || !wallpaper){
           return(
-              <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-              <Spinner color="yellow"/>
-              </View>
+            <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+            </View>
           );
       };
   
@@ -82,28 +85,16 @@ import {  Container,
             </Header>
             <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
             <Content>
-            {wallpapers
-            ? wallpapers.map((wallpaper) => (
-              <Form style={styles.form} key={wallpaper.id.toString()}>
+              <Form style={styles.form}>
                 <Item stackedLabel style={styles.item}>
                   <Label style={styles.label}>Nombre</Label>
-                  <Input style={styles.input} placeholder={wallpaper.name} value={name} onChangeText={setName} defaultValue={wallpaper.name}/>
-                </Item>
-                <Item stackedLabel style={styles.item}>
-                  <Label style={styles.label}>Ruta</Label>
-                  <Input style={styles.input} placeholder={wallpaper.route} value={route} onChangeText={setRoute} defaultValue={wallpaper.route}/>
+                  <Input style={styles.input} placeholder={wallpaper[0].name} value={name} onChangeText={setName}/>
                 </Item>
                 <Item stackedLabel style={styles.item}>
                   <Label style={styles.label}>Etiquetas</Label>
-                  <Input style={styles.input} placeholder={wallpaper.tag} value={tag} onChangeText={setTag}/>
-                </Item>
-                <Item stackedLabel style={styles.item}>
-                  <Label style={styles.label}>Resolición</Label>
-                  <Input style={styles.input} placeholder={wallpaper.resolution} value={resolution} onChangeText={setResolution}/>
+                  <Input style={styles.input} placeholder={wallpaper[0].tag} value={tag} onChangeText={setTag}/>
                 </Item>
               </Form>
-              ))
-              : null}
               <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
                 <Text style={styles.text}>Editar</Text>
               </Button>

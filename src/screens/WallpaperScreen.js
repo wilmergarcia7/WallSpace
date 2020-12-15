@@ -25,8 +25,6 @@ const wallpaperScreen = ({ navigation, route})=>{
     const {code} = route.params;
 
 
-    //const prueba = 
-
      // Hook de efecto
     useEffect(() => {
         const getWallpapaer = () =>{
@@ -38,7 +36,7 @@ const wallpaperScreen = ({ navigation, route})=>{
         if(wallpaper.length){
             setTheWallpaper(wallpaper[0].code);
             setid(wallpaper[0].id);
-            console.log(theWallpaper);
+            console.log(wallpaper);
         }
     }, [code,id]);
 
@@ -65,7 +63,7 @@ const wallpaperScreen = ({ navigation, route})=>{
         16: require("../../assets/Wallpapers/16.jpg"),
     } 
 
-    if(!fontsLoaded){
+    if(!fontsLoaded || !wallpaper){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
             <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
@@ -79,16 +77,8 @@ const wallpaperScreen = ({ navigation, route})=>{
                 <ImageBackground source={imagesWallpapers[wallpaper[0].code]} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
-                            <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+                            <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
                                 <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
-                            </Button>
-                        </View>
-                        <View style={{flexDirection: "row", marginLeft:"40%"}}>
-                            <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/view.png")} style={styles.icon}/>
-                            </Button>
-                            <Button style={styles.button} transparent>
-                                <Image source={require("../../assets/icons/heart.png")} style={styles.icon}/>
                             </Button>
                         </View>
                     </View>
@@ -96,11 +86,11 @@ const wallpaperScreen = ({ navigation, route})=>{
                 <View style={styles.infomationContainer}>
                     <View style={styles.tagContainer}>
                         <Image source={require("../../assets/icons/tag.png")} style={{height: 25, width: 25, marginLeft: "2%"}}/>
-                        <Text style={styles.tag}> Zelda, Nintendo, Juegos, Link, Trifuerza</Text>
+                        <Text style={styles.tag}> {wallpaper[0].tag}</Text>
                     </View>
-                    <Text style={styles.infomation}>NOMBRE:  </Text>
-                    <Text style={styles.infomation}>AUTOR: Wilmer Garcia</Text> 
-                    <Text style={styles.infomation}>FECHA: 04/12/2020</Text> 
+                    <Text style={styles.infomation}>NOMBRE: {wallpaper[0].name} </Text>
+                    <Text style={styles.infomation}>CODIGO: {wallpaper[0].code}</Text> 
+                    <Text style={styles.infomation}>FECHA: {wallpaper[0].date}</Text> 
                 </View>
             </Content>
         </Container>

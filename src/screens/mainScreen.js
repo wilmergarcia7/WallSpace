@@ -61,7 +61,7 @@ const MainScreen = ({ navigation })=>{
     if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Spinner color="yellow"/>
+            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
             </View>
         );
     };

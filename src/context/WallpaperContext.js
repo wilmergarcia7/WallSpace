@@ -22,14 +22,14 @@ export const WallpaperContextProvider = (props) => {
     return database.getWallpapers(setWallpapers);
   };
 
-  const editWallpaper = (name, route, tag, resolution, id) => {
-    return database.editWallpaper(name, route, tag, resolution, id, refreshWallpapers);
+  const editWallpaper = async (name, tag, id) => {
+    await database.editWallpaper(name, tag, id, refreshWallpapers);
+    return refreshWallpapers();
   };
-  /*const getWallpaperById = (id) => {
-    return database.getWallpaperById(id, refreshWallpapers);
-  };*/
-  const deleteWallpaperById = (id) => {
-    return database.deleteWallpaperById(id, refreshWallpapers);
+ 
+  const deleteWallpaperById = async (id) => {
+    await database.deleteWallpaperById(id, refreshWallpapers);
+    return refreshWallpapers();
   };
 
   const addNewWallpaper = async (name, code, tag) => {

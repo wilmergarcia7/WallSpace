@@ -1,3 +1,4 @@
+// Importamos todo lo necesario para la creacion de la pantalla
 import {  Container,
     Content,
     Button,
@@ -13,12 +14,15 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
     // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
     const { width, height } = Dimensions.get("window");
 
+    // Variables para amacenar lo ingresado por el usuario
     const [theWallpaper, setTheWallpaper] = useState(null);
     const [id, setid] = useState(false);
 
+    // Variables importadas desde el contex
     const wallpaperContext = useContext(WallpaperContext);
     const { getWallpaperById, wallpaper } = wallpaperContext;
 
+    // codigo enviado de la pantalla anterior
     const {code} = route.params;
 
     // Hook de efecto
@@ -35,10 +39,12 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
         }
     }, [code,id]);
 
+    // Obtener las fuentes que se utilizaran en la pantalla.
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
     });
 
+    // Listados de walpapers disponibles para mostrar
     const imagesWallpapers = {
         1: require("../../assets/Wallpapers/1.jpg"),
         2: require("../../assets/Wallpapers/2.jpg"),
@@ -58,6 +64,8 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
         16: require("../../assets/Wallpapers/16.jpg"),
     } 
 
+    // En caso de no encontrar resultados o tardar en encontrarlos se carga 
+    // la siguiente pantalla temporal.
     if(!fontsLoaded || !wallpaper){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -66,6 +74,7 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
         );
     };
 
+    // Creación de la pantalla
     return(
         <Container>
             <Content>
@@ -102,7 +111,7 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
 };
 
 
-
+// Estilos utilizados en la pantalla
 const styles = StyleSheet.create({
     optionBar: {
         width: "100%",

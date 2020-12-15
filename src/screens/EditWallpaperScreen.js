@@ -1,3 +1,4 @@
+// Importamos todo lo necesario para la creacion de la pantalla
 import {  Container, 
     Header, 
     Item, 
@@ -14,18 +15,27 @@ import {  Container,
   import * as Font from "expo-font";
   import { WallpaperContext } from "../context/WallpaperContext";
 
+  // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
   const { width, height } = Dimensions.get("window");
   
   const editWallpaperScreen = ({navigation, route})=>{
     
+    // Variables para amacenar lo ingresado por el usuario
     const [name, setName] = useState("");
     const [tag, setTag] = useState("");
+
+    // Variable que se deben inicializar
     const [theWallpaper, setTheWallpaper] = useState(null);
     const [id, setid] = useState(false);
+
+    // Variables importadas desde el contex
     const wallpaperContext = useContext(WallpaperContext);
     const { getWallpaperById, refreshWallpapers, editWallpaper, wallpaper } = wallpaperContext;
+
+    // Variables para inicializar la fuente
     const [fontsLoaded, setFontsLoaded] = useState(false);
 
+    // codigo enviado de la pantalla anterior
     const {code} = route.params;
 
      // Cargar la fuente de manera asíncrona
@@ -54,8 +64,10 @@ import {  Container,
           setTheWallpaper(wallpaper[0].code);
           setid(wallpaper[0].id);
       }
-  }, [code,id]);
+    }, [code,id]);
 
+    // Función creada para, mandar a llamar la fucion de editar
+    // wallpaper seleccionada por el usuario
     const handlerNewWallpaper = () =>{
 
       if(!name){
@@ -72,100 +84,103 @@ import {  Container,
       navigation.navigate("myWallpaper", {});
     };    
  
-  
+  // En caso de no encontrar resultados o tardar en encontrarlos se carga 
+  // la siguiente pantalla temporal.
   if(!fontsLoaded || !wallpaper){
-          return(
-            <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
-            </View>
-          );
-      };
-  
       return(
-        <Container style={styles.container}>               
-            <Header style={styles.header}>
-              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
-                <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
-              </Button>
-              <Text style={styles.textHeader}>Editar Wallpaper</Text>    
-            </Header>
-            <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
-            <Content>
-              <Form style={styles.form}>
-                <Item stackedLabel style={styles.item}>
-                  <Label style={styles.label}>Nombre</Label>
-                  <Input style={styles.input} placeholder={wallpaper[0].name} value={name} onChangeText={setName}/>
-                </Item>
-                <Item stackedLabel style={styles.item}>
-                  <Label style={styles.label}>Etiquetas</Label>
-                  <Input style={styles.input} placeholder={wallpaper[0].tag} value={tag} onChangeText={setTag}/>
-                </Item>
-              </Form>
-              <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
-                <Text style={styles.text}>Editar</Text>
-              </Button>
-            </Content>
-        </Container>
-    );
+        <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
+        <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+        </View>
+      );
   };
   
-  const styles = StyleSheet.create({
-    container: {
-        backgroundColor:"#0D0D0D",
-        width: width,
-        height: height,
-    },
-    header:{     
-        alignItems: "center",
-        backgroundColor: "#025159",
-        position:"relative",
-        flexDirection: "row",
-    },
-    textHeader:{
-        color: "#ffffff",
-        fontFamily: "Triforce",
-        margin: "18%",
-        fontSize: 35,
-    },
-    label:{
-      color: "#ffffff",
-      fontFamily: "Triforce",
-      fontSize:25,
-    },
-    h1:{
-      color: "#ffffff",
-      fontFamily: "Triforce",
-      fontSize:25,
-      alignSelf:"center",
-      marginTop:"5%",
-    },
-    item:{
-      height:55,      
-    },
-    input:{
-      color:"#FFFFFF",
-      fontSize:22,
-      fontFamily: "Triforce",
-    },
-    form:{
-        flex:1,
-    },
-    text:{
-      color:"#FFFFFF",
-      fontSize:25,
-      fontFamily: "Triforce",
-    },
-    button:{
-      marginLeft:"35%",
-      marginRight:"35%",
-      marginTop:"15%",
-      backgroundColor:"#025159",
-    },
-    icon:{
-      height: 30,
-      width: 30,
-    },
-    
-  });
+  // Creación de la pantalla
+  return(
+    <Container style={styles.container}>               
+        <Header style={styles.header}>
+          <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+            <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
+          </Button>
+          <Text style={styles.textHeader}>Editar Wallpaper</Text>    
+        </Header>
+        <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
+        <Content>
+          <Form style={styles.form}>
+            <Item stackedLabel style={styles.item}>
+              <Label style={styles.label}>Nombre</Label>
+              <Input style={styles.input} placeholder={wallpaper[0].name} value={name} onChangeText={setName}/>
+            </Item>
+            <Item stackedLabel style={styles.item}>
+              <Label style={styles.label}>Etiquetas</Label>
+              <Input style={styles.input} placeholder={wallpaper[0].tag} value={tag} onChangeText={setTag}/>
+            </Item>
+          </Form>
+          <Button mode="contained" style={styles.button} onPress={handlerNewWallpaper}>
+            <Text style={styles.text}>Editar</Text>
+          </Button>
+        </Content>
+    </Container>
+  );
+};
   
-  export default editWallpaperScreen; 
+// Estilos utilizados en la pantalla
+const styles = StyleSheet.create({
+  container: {
+      backgroundColor:"#0D0D0D",
+      width: width,
+      height: height,
+  },
+  header:{     
+      alignItems: "center",
+      backgroundColor: "#025159",
+      position:"relative",
+      flexDirection: "row",
+  },
+  textHeader:{
+      color: "#ffffff",
+      fontFamily: "Triforce",
+      margin: "18%",
+      fontSize: 35,
+  },
+  label:{
+    color: "#ffffff",
+    fontFamily: "Triforce",
+    fontSize:25,
+  },
+  h1:{
+    color: "#ffffff",
+    fontFamily: "Triforce",
+    fontSize:25,
+    alignSelf:"center",
+    marginTop:"5%",
+  },
+  item:{
+    height:55,      
+  },
+  input:{
+    color:"#FFFFFF",
+    fontSize:22,
+    fontFamily: "Triforce",
+  },
+  form:{
+      flex:1,
+  },
+  text:{
+    color:"#FFFFFF",
+    fontSize:25,
+    fontFamily: "Triforce",
+  },
+  button:{
+    marginLeft:"35%",
+    marginRight:"35%",
+    marginTop:"15%",
+    backgroundColor:"#025159",
+  },
+  icon:{
+    height: 30,
+    width: 30,
+  },
+  
+});
+  
+export default editWallpaperScreen; 

@@ -1,3 +1,4 @@
+// Importamos todo lo necesario para la creacion de la pantalla
 import {  Container, 
     Header, 
     Button,
@@ -11,18 +12,21 @@ import {  Container,
   import { Provider } from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
   
-  
+  // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
   const { width, height } = Dimensions.get("window");
   
   const myWallpaperScreen = ({navigation})=>{
     
+    // Variables importadas desde el contex
     const wallpaperContext = useContext(WallpaperContext);
     const { wallpapers } = wallpaperContext;
 
+    // Obtener las fuentes que se utilizaran en la pantalla.
     let [fontsLoaded] = useFonts({
       'Triforce': require("../../assets/fonts/Triforce.ttf")
     });
     
+    // Listados de walpapers disponibles para mostrar
     const imagesWallpapers = {
         1: require("../../assets/Wallpapers/1.jpg"),
         2: require("../../assets/Wallpapers/2.jpg"),
@@ -42,16 +46,18 @@ import {  Container,
         16: require("../../assets/Wallpapers/16.jpg"),
       } 
 
+    // En caso de no encontrar resultados o tardar en encontrarlos se carga 
+    // la siguiente pantalla temporal.
     if(!fontsLoaded){
-          return(
-            <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
-            <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
-            </View>
-          );
-      };
+        return(
+        <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
+        <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
+        </View>
+        );
+    };
 
-  
-      return(
+    // Creación de la pantalla
+    return(
         <Container style={styles.container}>  
             <Provider>        
                 <Header style={styles.header}>
@@ -86,91 +92,92 @@ import {  Container,
     );
   };
   
-  const styles = StyleSheet.create({
-    container: {
-        backgroundColor:"#0D0D0D",
-        width: width,
-        height: height,
-    },
-    header:{     
-        alignItems: "center",
-        backgroundColor: "#025159",
-        position:"relative",
-    },
-    text:{
-        color: "#ffffff",
-        fontFamily: "Triforce",
-        margin: "18%",
-        fontSize: 35,
-    },
-    textt:{
-        color:"#FFFFFF",
-      fontSize:25,
-      fontFamily: "Triforce",
-    },
-    iconSize:{
-        width: 30,
-        height: 30,
-        alignSelf:"auto"
-    },
-    h1:{
-        color: "#ffffff",
-        fontFamily: "Triforce",
-        fontSize: 18,
-        marginLeft:"5%",        
-    },
-    view:{
-        flex:1,
-        
-        alignItems:"center",
-    },
-    imageWallpaper:{
-        width: 120,
-        height: 210,
-        margin:2,
-        alignSelf:"center",
-    },
-    content: {
-        backgroundColor: "#027373",
-        alignContent:"flex-start",
-        height: height,
-        width: width,
-    },
-    card:{
-        backgroundColor:"#027373",
-        borderColor:"#027373",
-    },
-    button:{
-        backgroundColor:"#025159",
-        borderColor: "#025159",
-        width: 32,
-        height: 32,
-        alignSelf:"center",
-    },
-    item:{
-        alignItems:"center",
-    },
-    viewMenu:{
-        paddingTop: 0,
-        flexDirection: 'row',
-        justifyContent: "flex-start",
-        position:"relative",
-        fontFamily: "Triforce",
-        
-    },
-    menuItem:{
-        color:"#025159",    
-    },
-    menu:{
-        fontFamily: "Triforce",
-    },
-    back:{
-        backgroundColor: "#025159",
-    },
-    icon:{
-        height: 30,
-        width: 30,
-    },
+  // Estilos utilizados en la pantalla
+const styles = StyleSheet.create({
+container: {
+    backgroundColor:"#0D0D0D",
+    width: width,
+    height: height,
+},
+header:{     
+    alignItems: "center",
+    backgroundColor: "#025159",
+    position:"relative",
+},
+text:{
+    color: "#ffffff",
+    fontFamily: "Triforce",
+    margin: "18%",
+    fontSize: 35,
+},
+textt:{
+    color:"#FFFFFF",
+    fontSize:25,
+    fontFamily: "Triforce",
+},
+iconSize:{
+    width: 30,
+    height: 30,
+    alignSelf:"auto"
+},
+h1:{
+    color: "#ffffff",
+    fontFamily: "Triforce",
+    fontSize: 18,
+    marginLeft:"5%",        
+},
+view:{
+    flex:1,
+    
+    alignItems:"center",
+},
+imageWallpaper:{
+    width: 120,
+    height: 210,
+    margin:2,
+    alignSelf:"center",
+},
+content: {
+    backgroundColor: "#027373",
+    alignContent:"flex-start",
+    height: height,
+    width: width,
+},
+card:{
+    backgroundColor:"#027373",
+    borderColor:"#027373",
+},
+button:{
+    backgroundColor:"#025159",
+    borderColor: "#025159",
+    width: 32,
+    height: 32,
+    alignSelf:"center",
+},
+item:{
+    alignItems:"center",
+},
+viewMenu:{
+    paddingTop: 0,
+    flexDirection: 'row',
+    justifyContent: "flex-start",
+    position:"relative",
+    fontFamily: "Triforce",
+    
+},
+menuItem:{
+    color:"#025159",    
+},
+menu:{
+    fontFamily: "Triforce",
+},
+back:{
+    backgroundColor: "#025159",
+},
+icon:{
+    height: 30,
+    width: 30,
+},
 });
   
   export default myWallpaperScreen; 

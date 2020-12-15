@@ -1,4 +1,5 @@
-import {  Container,
+// Importamos todo lo necesario para la creacion de la pantalla
+import { Container,
     Button,
     Text,
   } from "native-base";
@@ -10,12 +11,15 @@ import { WallpaperContext } from "../context/WallpaperContext";
 
 const deleteWallpaper = ({ navigation, route})=>{
 
+    // Variable que se deben inicializar
     const [theWallpaper, setTheWallpaper] = useState(null);
     const [id, setid] = useState(false);
 
+    // Variables importadas desde el contex
     const wallpaperContext = useContext(WallpaperContext);
     const { getWallpaperById, refreshWallpapers, deleteWallpaperById, wallpaper } = wallpaperContext;
 
+    // codigo enviado de la pantalla anterior
     const {code} = route.params;
 
     // Hook de efecto
@@ -32,17 +36,23 @@ const deleteWallpaper = ({ navigation, route})=>{
         }
     }, [code,id]);
 
+    // Obtener las fuentes que se utilizaran en la pantalla.
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
     });
 
+    // Función creada para, mandar a llamar la fucion de eliminar
+    // wallpaper al momento que el usuario preciona el boton de
+    // aceptar
     const handlerDeleteWallpaper = () =>{
         deleteWallpaperById(wallpaper[0].id, refreshWallpapers);
   
-        // Regresar a la pantalla anterior
+        // Regresar a la pantalla de mis wallpapers
         navigation.navigate("myWallpaper", {});
       };    
 
+    // En caso de no encontrar resultados o tardar en encontrarlos se carga 
+    // la siguiente pantalla temporal.
     if(!fontsLoaded || !wallpaper){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -51,11 +61,12 @@ const deleteWallpaper = ({ navigation, route})=>{
         );
     };
 
+    // Creación de la pantalla
     return(
         <Container style={styles.container}>
             <Card style={styles.message}>
                 <View>
-                    <Text style={styles.text}>Esta Seguro de Eliminar la Wallpaper</Text>
+                    <Text style={styles.text}>Esta Seguro de Eliminar el Wallpaper</Text>
                 </View>
                 <View style={{flexDirection:"row", alignSelf: "center" }}>
                     <Button style={styles.button} transparent onPress={handlerDeleteWallpaper}>
@@ -72,7 +83,7 @@ const deleteWallpaper = ({ navigation, route})=>{
 };
 
 
-
+// Estilos utilizados en la pantalla
 const styles = StyleSheet.create({
     container:{
         justifyContent:"center",

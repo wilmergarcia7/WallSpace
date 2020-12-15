@@ -27,11 +27,11 @@ const { width, height } = Dimensions.get("window");
 
 const MainScreen = ({ navigation })=>{
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers } = wallpaperContext;
+    const { wallpapers, wallpaper, getWallpaperById, refreshWallpapers } = wallpaperContext;
     
     const [visible, setVisible] = React.useState(false);
     const openMenu = () => setVisible(true);
-
+    
     const closeMenu = () => setVisible(false);
 
     let [fontsLoaded] = useFonts({
@@ -83,6 +83,11 @@ const MainScreen = ({ navigation })=>{
         15: require("../../assets/Wallpapers/15.png"),
         16: require("../../assets/Wallpapers/16.jpg"),
       } 
+      let numero = 1
+      
+      
+      let prueba = require(`../../assets/Wallpapers/1.jpg`)
+      let imagen
       
     return(
         <Container style={styles.container}>  
@@ -107,6 +112,7 @@ const MainScreen = ({ navigation })=>{
                 </View>
                 <Text style={styles.text}>WallSpace</Text>    
                 <Button onPress={buttonSearch} style={styles.button} name="searchScreen">
+                    
                     <Image  source={require("../../assets/icons/search.png")}
                             style={styles.iconSize}/>
                </Button>
@@ -126,12 +132,19 @@ const MainScreen = ({ navigation })=>{
                     <Image source={imagesWallpapers[item.code]}
                         style={styles.imageWallpaper}
                     />
-                    </Card>
+                   
+                    </Card>                   
                 </TouchableOpacity>
+                
             )
         }}
         />
-
+        <View>
+        <Image source={prueba}
+                        style={styles.imageWallpaper}
+                    />
+        </View>
+        
             </Provider>
         </Container>
     );

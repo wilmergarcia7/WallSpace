@@ -14,7 +14,7 @@ import {  Container,
     Label,
     Button 
   } from "native-base";
-  import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
+  import { StyleSheet, Image, View, ImageBackground, Dimensions, FlatList,SafeAreaView } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
   //import { useFonts } from "expo-font";
   import { TouchableOpacity } from "react-native-gesture-handler";
@@ -69,9 +69,76 @@ import {  Container,
       } else {
         setErrorWallpaper(true);
       }
+    }; 
       
-      
-    };    
+      const imagesWallpapers = [
+        {
+          id: 1,
+          imageRoute: require("../../assets/Wallpapers/1.jpg"),
+        },
+        {
+          id: 2,
+          imageRoute: require("../../assets/Wallpapers/2.jpg"),
+        },
+        {
+          id: 3,
+          imageRoute: require("../../assets/Wallpapers/3.png"),
+        },
+        {
+          id: 4,
+          imageRoute: require("../../assets/Wallpapers/4.jpg"),
+        },
+        {
+          id: 5,
+          imageRoute: require("../../assets/Wallpapers/5.jpg"),
+        },
+        {
+          id: 6,
+          imageRoute: require("../../assets/Wallpapers/6.jpg"),
+        },
+        {
+          id: 7,
+          imageRoute: require("../../assets/Wallpapers/7.jpg"),
+        },
+        {
+          id: 8,
+          imageRoute: require("../../assets/Wallpapers/8.jpg"),
+        },
+        {
+          id: 9,
+          imageRoute: require("../../assets/Wallpapers/9.jpg"),
+        },
+        {
+          id: 10,
+          imageRoute: require("../../assets/Wallpapers/10.jpg"),
+        },
+        {
+          id: 11,
+          imageRoute: require("../../assets/Wallpapers/11.jpg"),
+        },
+        {
+          id: 12,
+          imageRoute: require("../../assets/Wallpapers/12.jpg"),
+        },
+        {
+          id: 13,
+          imageRoute: require("../../assets/Wallpapers/13.jpg"),
+        },
+        {
+          id: 14,
+          imageRoute: require("../../assets/Wallpapers/14.png"),
+        },
+        {
+          id: 15,
+          imageRoute: require("../../assets/Wallpapers/15.png"),
+        },
+        {
+          id: 16,
+          imageRoute: require("../../assets/Wallpapers/16.jpg"),
+        }
+    
+      ]
+       
  
   if(!fontsLoaded){
           return(
@@ -86,7 +153,30 @@ import {  Container,
             <Header style={styles.header}>
                 <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
             </Header>
-            <H1 style={styles.h1}>Ingresa los datos correspondientes:</H1>
+            <SafeAreaView style={styles.container}>
+            <FlatList
+         
+        data={imagesWallpapers}
+        numColumns={3}
+        columnWrapperStyle={{justifyContent:'space-between'}}
+        keyExtractor={(item) => item.id}
+        ListEmptyComponent={<Text>¡No hay wallpapers :"c!</Text>}
+        renderItem={({ item }) =>{
+            return(
+                
+                    <Card style={styles.card}>
+                    <Image source={item.imageRoute}
+                        style={styles.imageWallpaper}
+                    />
+                    <Text style={styles.text}>Código: {item.id}</Text>
+                    </Card>                    
+            )
+        }}
+        />
+        </SafeAreaView>
+            <H1 style={styles.h1}>Elija una imagen de la galería, escriba un nombre, 
+                                  escriba el código de la imagen seleccionada, y Etiquetas
+                                  que representen a la imagen.</H1>
             <Content>
             <Form style={styles.form}>
            
@@ -94,7 +184,6 @@ import {  Container,
               <Label style={styles.label}>Nombre</Label>
               <Input style={styles.input} value={name} onChangeText={setName}/>
             </Item>
-            <Text>Códigos disponibles: 10, 11, 12, 13, 14, 15, 16</Text>
             <Item floatingLabel style={styles.item}>
               <Label style={styles.label}>Código</Label>
               <Input style={styles.input} value={code} onChangeText={setCode}/>
@@ -113,6 +202,7 @@ import {  Container,
               <Text style={styles.text}>Agregar</Text>
               </Button>
             </Content>
+            
         </Container>
     );
   };
@@ -120,8 +210,8 @@ import {  Container,
   const styles = StyleSheet.create({
     container: {
         backgroundColor:"#0D0D0D",
-        width: width,
-        height: height,
+        flex: 1,
+        
     },
     header:{     
         alignItems: "center",
@@ -173,7 +263,17 @@ import {  Container,
       fontFamily: "Triforce",
       alignSelf: "center",
       marginTop: 10,
-    }
+    },
+    imageWallpaper:{
+      width: 90,
+      height: 110,
+      margin:2,
+      alignSelf:"center",
+  },
+  card:{
+    backgroundColor:"#027373",
+    borderColor:"#027373",
+},
   });
   
   export default AddWallpaperScreen; 

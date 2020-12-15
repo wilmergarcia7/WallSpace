@@ -43,7 +43,7 @@ export const WallpaperContextProvider = (props) => {
   };
 
   const getAllWallpapers = async () =>{
-    await database.getWallpapers();
+    await database.getWallpapers(refreshWallpapers);
     return refreshWallpapers();
   }
 

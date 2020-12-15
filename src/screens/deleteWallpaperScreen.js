@@ -1,9 +1,8 @@
 import {  Container,
-    Content,
     Button,
     Text,
   } from "native-base";
-import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-native";
+import { StyleSheet, Image, View} from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { useFonts } from "expo-font";
 import { Card } from "react-native-paper";
@@ -30,7 +29,6 @@ const deleteWallpaper = ({ navigation, route})=>{
         if(wallpaper.length){
             setTheWallpaper(wallpaper[0].code);
             setid(wallpaper[0].id);
-            console.log(theWallpaper);
         }
     }, [code,id]);
 

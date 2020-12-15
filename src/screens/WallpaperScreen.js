@@ -1,8 +1,6 @@
 import {  Container,
     Button,
-    Content, 
-    Spinner, 
-    Card, 
+    Content,
     Text,
   } from "native-base";
 import { StyleSheet, Image, View, ImageBackground, Dimensions} from "react-native";
@@ -20,7 +18,7 @@ const wallpaperScreen = ({ navigation, route})=>{
     const [id, setid] = useState(false);
 
     const wallpaperContext = useContext(WallpaperContext);
-    const { getWallpaperById, refreshWallpapers, setWallpaper, wallpaper } = wallpaperContext;
+    const { getWallpaperById, wallpaper } = wallpaperContext;
 
     const {code} = route.params;
 
@@ -36,7 +34,6 @@ const wallpaperScreen = ({ navigation, route})=>{
         if(wallpaper.length){
             setTheWallpaper(wallpaper[0].code);
             setid(wallpaper[0].id);
-            console.log(wallpaper);
         }
     }, [code,id]);
 

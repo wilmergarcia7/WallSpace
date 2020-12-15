@@ -32,7 +32,6 @@ const wallpaperOptionsScreen = ({ navigation, route})=>{
         if(wallpaper.length){
             setTheWallpaper(wallpaper[0].code);
             setid(wallpaper[0].id);
-            console.log(theWallpaper);
         }
     }, [code,id]);
 

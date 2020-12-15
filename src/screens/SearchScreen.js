@@ -1,22 +1,13 @@
 import {  Container, 
   Header, 
   Item, 
-  Input, 
-  Icon, 
+  Input,
   Button,
-  H1, 
-  H2, 
-  Content, 
-  Spinner, 
-  Card, 
-  Text, 
-  CardItem 
 } from "native-base";
-import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
+import { StyleSheet, Image, View, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useFonts } from "expo-font";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import {  Menu, Divider, Provider } from 'react-native-paper';
+import { Provider } from 'react-native-paper';
 
 
 const { width, height } = Dimensions.get("window");
@@ -29,7 +20,6 @@ const SearchScreen = ()=>{
 
   const [search, setSearch] = useState("");
   const [searchError, setSearchError] = useState(false);
-  const [error, setError] = useState(false);
   
   const handlerSearch = () =>{
     if (!search) {

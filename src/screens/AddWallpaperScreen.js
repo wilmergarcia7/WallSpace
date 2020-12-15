@@ -1,24 +1,16 @@
 import {  Container, 
     Header, 
     Item, 
-    Input, 
-    Icon, 
-    H1, 
-    H2, 
-    Content, 
-    Spinner, 
-    Card, 
-    Text, 
-    CardItem,
+    Input,  
+    H1,
+    Content,
+    Text,
     Form,
     Label,
     Button 
   } from "native-base";
-  import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
+  import { StyleSheet, Image, View, Dimensions } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
-  //import { useFonts } from "expo-font";
-  import { TouchableOpacity } from "react-native-gesture-handler";
-//  import {  Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
   import * as Font from "expo-font";
   
@@ -31,7 +23,6 @@ import {  Container,
     const [tag, setTag] = useState("");
     const [fontsLoaded, setFontsLoaded] = useState(false);
     const [enableSave, setEnableSave] = useState(true);
-    const [errorWallpaper, setErrorWallpaper] = useState(false);
     const wallpaperContext = useContext(WallpaperContext);
     const { addNewWallpaper, refreshWallpapers } = wallpaperContext;
 
@@ -84,7 +75,10 @@ import {  Container,
         return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-                <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
+              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+                <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
+              </Button>
+              <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
             </Header>
             <H1 style={styles.h1}>Ingresa los datos correspondientes:</H1>
             <Content>
@@ -131,6 +125,7 @@ import {  Container,
     textHeader:{
         color: "#ffffff",
         fontFamily: "Triforce",
+        margin: "14%",
         fontSize: 35,
     },
     label:{
@@ -173,7 +168,11 @@ import {  Container,
       fontFamily: "Triforce",
       alignSelf: "center",
       marginTop: 10,
-    }
+    },
+    icon:{
+      height: 30,
+      width: 30,
+    },
   });
   
   export default AddWallpaperScreen; 

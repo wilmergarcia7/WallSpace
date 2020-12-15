@@ -1,21 +1,11 @@
 import {  Container, 
-    Header, 
-    Item, 
-    Input, 
-    Icon, 
-    Button,
-    H1, 
-    H2, 
-    Content, 
-    Spinner, 
+    Header,
+    Button, 
     Card, 
-    Text, 
-    CardItem,
-    List,
-    ListItem, 
+    Text,
   } from "native-base";
 import { StyleSheet, Image, View, FlatList, Dimensions } from "react-native";
-import React, { useEffect, useState, useContext } from "react";
+import React, { useContext } from "react";
 import { useFonts } from "expo-font";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import {  Menu, Divider, Provider } from 'react-native-paper';

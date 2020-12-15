@@ -1,23 +1,17 @@
 import {  Container, 
     Header, 
     Item, 
-    Input, 
-    Icon, 
+    Input,
     H1, 
-    H2, 
     Content, 
-    Spinner, 
-    Card, 
     Text, 
-    CardItem,
     Form,
     Label,
-    ListItem,
+    Button,
   } from "native-base";
   import { StyleSheet, View, Dimensions, Image } from "react-native";
   import React, { useContext, useState, useEffect } from "react";
-  import { useFonts } from "expo-font";
-  import { Button} from 'react-native-paper';
+  import * as Font from "expo-font";
   import { WallpaperContext } from "../context/WallpaperContext";
 
   const { width, height } = Dimensions.get("window");
@@ -30,13 +24,23 @@ import {  Container,
     const [id, setid] = useState(false);
     const wallpaperContext = useContext(WallpaperContext);
     const { getWallpaperById, refreshWallpapers, editWallpaper, wallpaper } = wallpaperContext;
+    const [fontsLoaded, setFontsLoaded] = useState(false);
 
     const {code} = route.params;
 
-    let [fontsLoaded] = useFonts({
-      'Triforce': require("../../assets/fonts/Triforce.ttf")
-      
-    });
+     // Cargar la fuente de manera asíncrona
+     useEffect(() => {
+      const loadFontsAsync = async () => {
+        await Font.loadAsync({
+          Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
+          'Triforce': require("../../assets/fonts/Triforce.ttf")
+        }).then(() => {
+          setFontsLoaded(true);
+        });
+      };
+  
+      loadFontsAsync();
+    }, []);
 
     // Hook de efecto
     useEffect(() => {
@@ -49,7 +53,6 @@ import {  Container,
       if(wallpaper.length){
           setTheWallpaper(wallpaper[0].code);
           setid(wallpaper[0].id);
-          console.log(theWallpaper);
       }
   }, [code,id]);
 
@@ -81,7 +84,10 @@ import {  Container,
       return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-                <Text style={styles.textHeader}>Editar Wallpaper</Text>    
+              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+                <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
+              </Button>
+              <Text style={styles.textHeader}>Editar Wallpaper</Text>    
             </Header>
             <H1 style={styles.h1}>Ingresa los nuevos datos correspondientes:</H1>
             <Content>
@@ -113,10 +119,12 @@ import {  Container,
         alignItems: "center",
         backgroundColor: "#025159",
         position:"relative",
+        flexDirection: "row",
     },
     textHeader:{
         color: "#ffffff",
         fontFamily: "Triforce",
+        margin: "18%",
         fontSize: 35,
     },
     label:{
@@ -148,11 +156,15 @@ import {  Container,
       fontFamily: "Triforce",
     },
     button:{
-      marginLeft:"25%",
-      marginRight:"25%",
+      marginLeft:"35%",
+      marginRight:"35%",
       marginTop:"15%",
       backgroundColor:"#025159",
-    }
+    },
+    icon:{
+      height: 30,
+      width: 30,
+    },
     
   });
   

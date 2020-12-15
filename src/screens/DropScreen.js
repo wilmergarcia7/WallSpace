@@ -1,22 +1,12 @@
 import {  Container, 
-    Header, 
-    Item, 
-    Input, 
-    Icon, 
-    H1, 
-    H2, 
-    Content, 
-    Spinner, 
-    Card, 
-    Text, 
-    CardItem,
-    Form,
-    Label 
+    Header,
+    H1,
+    Content,
+    Text,
   } from "native-base";
-  import { StyleSheet, Image, View, ImageBackground, Dimensions } from "react-native";
-  import React, { useContext, useEffect, useState } from "react";
+  import { StyleSheet, Image, View, Dimensions } from "react-native";
+  import React, { useContext } from "react";
   import { useFonts } from "expo-font";
-  import { TouchableOpacity } from "react-native-gesture-handler";
   import {  Button} from 'react-native-paper';
   import { WallpaperContext } from "../context/WallpaperContext";
   
@@ -25,7 +15,7 @@ import {  Container,
   const DropScreen = ({navigation})=>{
     
     const wallpaperContext = useContext(WallpaperContext);
-    const { wallpapers, dropWallpaper } = wallpaperContext;
+    const { dropWallpaper } = wallpaperContext;
 
 
     let [fontsLoaded] = useFonts({

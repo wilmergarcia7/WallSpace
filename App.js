@@ -7,7 +7,6 @@ import WallpaperOptionsScreen from "./src/screens/WallpaperOptionsScreen"
 import EditWallpaperScreen from "./src/screens/EditWallpaperScreen";
 import deleteWallpaperScreen from "./src/screens/deleteWallpaperScreen";
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
-import DropScreen  from "./src/screens/DropScreen";
 import wallpaperResultsScreen from "./src/screens/wallpapersResultsScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
@@ -38,7 +37,6 @@ export default function App() {
         <Stack.Screen name="deleteWallpaperScreen" component={deleteWallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="searchScreen" component={SearchScreen} options={{headerShown:false}}/>
         <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} options={{headerShown:false}}/>
-        <Stack.Screen name="eliminar" component={DropScreen} options={{headerShown:false}}/>
         <Stack.Screen name="results" component={wallpaperResultsScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
       </WallpaperContextProvider>

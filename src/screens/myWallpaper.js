@@ -64,7 +64,7 @@ import {  Container,
                     <Button transparent onPress={() => navigation.goBack()}>
                         <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
                     </Button>
-                    <Text style={styles.text}>Mis Walpapers</Text>
+                    <Text style={styles.text}>Mis Wallpapers</Text>
                 </Header>
                 
                 <FlatList

@@ -37,7 +37,6 @@ const deleteWallpaper = ({ navigation, route})=>{
     });
 
     const handlerDeleteWallpaper = () =>{
-        console.log(wallpaper[0].id);
         deleteWallpaperById(wallpaper[0].id, refreshWallpapers);
   
         // Regresar a la pantalla anterior

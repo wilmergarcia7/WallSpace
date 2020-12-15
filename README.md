@@ -20,13 +20,13 @@ en la galería de la aplicación en la pantalla de añadir.
   Se encuentran imágenes en el sistema que pueden ser añadidas utilizando el código que tienen debajo.<br>
   
 - <strong>Pantalla de eliminar</strong> <br>
-  
+  Elimina la imagen seleccionada por el usuario segun el id que contenga en la base.<br>  
 
 - <strong>Pantalla de búsqueda</strong> <br>
 
 
 - <strong>Pantalla de editar</strong> <br>
-
+  Edita la imagen que seleccione el usuario segun el id que contenga en la base.<br>
 
 # Tecnologías utilizados 
 
@@ -39,6 +39,7 @@ en la galería de la aplicación en la pantalla de añadir.
 - Adobe Photoshop
 - Adobe Illustrator
 - Adobe Color
+- SQLite
 
 # Recursos 
 - Paleta de colores

@@ -16,6 +16,9 @@ const wallpaperScreen = ({ navigation, route})=>{
     // Variables para obtener el alto y el ancho de la pantalla del dispositivo.
     const { width, height } = Dimensions.get("window");
 
+    const [theWallpaper, setTheWallpaper] = useState(null);
+    const [id, setid] = useState(false);
+
     const wallpaperContext = useContext(WallpaperContext);
     const { getWallpaperById, refreshWallpapers, setWallpaper, wallpaper } = wallpaperContext;
 
@@ -26,10 +29,18 @@ const wallpaperScreen = ({ navigation, route})=>{
 
      // Hook de efecto
     useEffect(() => {
-        getWallpaperById(code, setWallpaper);
-        console.log(wallpaper);
-    }, []);
+        const getWallpapaer = () =>{
+            getWallpaperById(code);
+        };
 
+        getWallpapaer();
+
+        if(wallpaper.length){
+            setTheWallpaper(wallpaper[0].code);
+            setid(wallpaper[0].id);
+            console.log(theWallpaper);
+        }
+    }, [code,id]);
 
     let [fontsLoaded] = useFonts({
         'Triforce': require("../../assets/fonts/Triforce.ttf")
@@ -65,7 +76,7 @@ const wallpaperScreen = ({ navigation, route})=>{
     return(
         <Container>
             <Content>
-                {/*<ImageBackground source={imagesWallpapers(wallpaper[1].code)} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
+                <ImageBackground source={imagesWallpapers[wallpaper[0].code]} style={{ width: width, height: height,  alignItems: "center"}} resizeMode="cover">
                     <View style={styles.optionBar}>
                         <View style={{alignContent:"flex-start", flexDirection: "row", flex:1}}>
                             <Button style={{marginLeft:"8%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
@@ -87,10 +98,10 @@ const wallpaperScreen = ({ navigation, route})=>{
                         <Image source={require("../../assets/icons/tag.png")} style={{height: 25, width: 25, marginLeft: "2%"}}/>
                         <Text style={styles.tag}> Zelda, Nintendo, Juegos, Link, Trifuerza</Text>
                     </View>
-                    <Text style={styles.infomation}>NOMBRE: Zelda </Text>
+                    <Text style={styles.infomation}>NOMBRE:  </Text>
                     <Text style={styles.infomation}>AUTOR: Wilmer Garcia</Text> 
                     <Text style={styles.infomation}>FECHA: 04/12/2020</Text> 
-                </View>*/}
+                </View>
             </Content>
         </Container>
     );

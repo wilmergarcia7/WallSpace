@@ -8,6 +8,7 @@ import EditWallpaperScreen from "./src/screens/EditWallpaperScreen";
 import deleteWallpaperScreen from "./src/screens/deleteWallpaperScreen";
 import AddWallpaperScreen from "./src/screens/AddWallpaperScreen";
 import DropScreen  from "./src/screens/DropScreen";
+import wallpaperResultsScreen from "./src/screens/wallpapersResultsScreen";
 import useDatabase from "./src/hooks/useDatabase";
 import { WallpaperContextProvider } from "./src/context/WallpaperContext";
 import { NavigationContainer } from "@react-navigation/native";
@@ -22,6 +23,7 @@ const Stack = createStackNavigator();
 */
 
 export default function App() {
+  // Carga la base de datos
   const isLoadingComplete = useDatabase();
 
   return (
@@ -37,6 +39,7 @@ export default function App() {
         <Stack.Screen name="searchScreen" component={SearchScreen} options={{headerShown:false}}/>
         <Stack.Screen name="addWallpaperScreen" component={AddWallpaperScreen} options={{headerShown:false}}/>
         <Stack.Screen name="eliminar" component={DropScreen} options={{headerShown:false}}/>
+        <Stack.Screen name="results" component={wallpaperResultsScreen} options={{headerShown:false}}/>
       </Stack.Navigator>
       </WallpaperContextProvider>
     </NavigationContainer>

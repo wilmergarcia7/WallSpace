@@ -66,7 +66,7 @@ const deleteWallpaper = ({ navigation, route})=>{
         <Container style={styles.container}>
             <Card style={styles.message}>
                 <View>
-                    <Text style={styles.text}>Esta Seguro de Eliminar el Wallpaper</Text>
+                    <Text style={styles.text}>¿Está Seguro de Eliminar el Wallpaper?</Text>
                 </View>
                 <View style={{flexDirection:"row", alignSelf: "center" }}>
                     <Button style={styles.button} transparent onPress={handlerDeleteWallpaper}>

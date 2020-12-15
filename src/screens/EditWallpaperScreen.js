@@ -84,7 +84,7 @@ import {  Container,
       return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
+              <Button style={{alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
                 <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
               </Button>
               <Text style={styles.textHeader}>Editar Wallpaper</Text>    
@@ -124,7 +124,7 @@ import {  Container,
     textHeader:{
         color: "#ffffff",
         fontFamily: "Triforce",
-        margin: "18%",
+        margin: "14%",
         fontSize: 35,
     },
     label:{
@@ -152,7 +152,7 @@ import {  Container,
     },
     text:{
       color:"#FFFFFF",
-      fontSize:25,
+      fontSize:23,
       fontFamily: "Triforce",
     },
     button:{

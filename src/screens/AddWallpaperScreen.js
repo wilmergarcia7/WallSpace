@@ -10,7 +10,7 @@ import {  Container,
     Button,
     Card 
   } from "native-base";
-  import { StyleSheet, Image, View, ImageBackground, Dimensions, FlatList,SafeAreaView } from "react-native";
+  import { StyleSheet, Image, View, Dimensions, FlatList,SafeAreaView } from "react-native";
   import React, { useContext, useEffect, useState } from "react";
   import { WallpaperContext } from "../context/WallpaperContext";
   import * as Font from "expo-font";
@@ -42,7 +42,7 @@ import {  Container,
     loadFontsAsync();
   }, []);
 
-
+    // useEffect que se encarga de verificar que los campos no esten vacíos
     useEffect(() => {
       if (name&&code&&tag) {
       setEnableSave(false);
@@ -50,7 +50,7 @@ import {  Container,
       else setEnableSave(true);
     }, [name, code, tag]);
 
-
+    // Se habilita al presionar el botón de agregar
     const handlerNewWallpaper = async () =>{
       
       if (name&&code&&tag){     
@@ -63,6 +63,7 @@ import {  Container,
       }
     }; 
       
+    // Data: almacena las imágenes que se encuentran en el repositorio local
       const imagesWallpapers = [
         {
           id: 1,
@@ -131,7 +132,7 @@ import {  Container,
     
       ]
        
- 
+      // Verifica que existan fuentes
   if(!fontsLoaded){
           return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -139,11 +140,13 @@ import {  Container,
             </View>
           );
    };
-  
+   
+   // Muestra imágenes que serán añadidas a la base de datos
+   // Después de ver las imágenes puede completar el formulario para añadir el wallpaper
         return(
         <Container style={styles.container}>               
             <Header style={styles.header}>
-              <Button transparent onPress={() => navigation.goBack()}>
+              <Button style={{marginLeft:"4%", alignSelf: "center"}} transparent onPress={() => navigation.goBack()}>
                 <Image source={require("../../assets/icons/back.png")} style={styles.icon}/>
               </Button>
               <Text style={styles.textHeader}>Añadir Wallpaper</Text>    
@@ -217,7 +220,7 @@ import {  Container,
     textHeader:{
         color: "#ffffff",
         fontFamily: "Triforce",
-        marginLeft: "19%",
+        margin: "14%",
         fontSize: 35,
     },
     label:{

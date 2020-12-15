@@ -1,8 +1,5 @@
 import {  Container, 
     Header, 
-    Item, 
-    Input,
-    Button,
     Text,
     Card,
   } from "native-base";
@@ -31,11 +28,11 @@ import {  Container,
 
     // Hook de efecto
     useEffect(() => {
-        const getWallpapaer = () =>{
+        const getWallpaper = () =>{
             getWallpaperByName(name);
         };
   
-        getWallpapaer();
+        getWallpaper();
   
         if(wallpaper.length){
             setTheWallpaper(wallpaper[0].name);
@@ -45,7 +42,7 @@ import {  Container,
     }, [name,code,id]);
     
   
-  
+  // Verifica que exista una fuente o un wallpaper en la base de datos
   if(!fontsLoaded || !wallpaper){
           return(
               <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
@@ -54,6 +51,7 @@ import {  Container,
           );
       };
 
+      // imagesWallpapers: Contiene las imágenes que serán agregadas en la base de datos
       const imagesWallpapers = {
         1: require("../../assets/Wallpapers/1.jpg"),
         2: require("../../assets/Wallpapers/2.jpg"),
@@ -72,7 +70,8 @@ import {  Container,
         15: require("../../assets/Wallpapers/15.png"),
         16: require("../../assets/Wallpapers/16.jpg"),
       } 
-  
+      
+      // Muestra la imagen de la palabra que se busca
       return(
         <Container style={styles.container}>  
         <Provider>        
@@ -108,47 +107,10 @@ import {  Container,
         margin: "18%",
         fontSize: 35,
     },
-    iconSize:{
-        width: 30,
-        height: 30,
-    },
-    h1:{
-        color: "#ffffff",
-        fontFamily: "Triforce",
-        fontSize: 17,
-        marginLeft:"6%",
-        marginRight:"6%",
-    },
-    view:{
-        flex:1,
-        flexDirection:"row",
-        alignSelf:"center",
-        marginLeft:8,
-        marginRight:20,
-    },
     imageWallpaper:{
         width: width,
         height: height,
         alignSelf:"center",
-    },
-    content: {
-        backgroundColor: "#027373",
-        alignContent:"center",
-        height: height,
-        width: width,
-    },
-    viewRow:{
-        backgroundColor:"#0D0D0D",
-        flexDirection:"row",
-        alignSelf:"center",       
-    },
-    cardItem:{
-        backgroundColor:"#027373",
-        alignItems:"center",
-        borderColor:"#027373",
-        padding:2,
-        marginLeft:5,
-        marginRight:5,
     },
     button:{
         backgroundColor:"#025159",
@@ -157,23 +119,6 @@ import {  Container,
         height: 42,
         alignSelf:"center",
     },
-    item:{
-        alignItems:"center",
-    },
-    viewMenu:{
-        paddingTop: 0,
-        flexDirection: 'row',
-        justifyContent: "flex-start",
-        position:"relative",
-        fontFamily: "Triforce",
-        
-    },
-    menuItem:{
-        color:"#025159",    
-    },
-    menu:{
-        fontFamily: "Triforce",
-    }
   });
   
   export default WallpapersResultsScreen; 

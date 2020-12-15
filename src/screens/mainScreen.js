@@ -28,6 +28,8 @@ const MainScreen = ({ navigation })=>{
         'Triforce': require("../../assets/fonts/Triforce.ttf")
       });
 
+
+      // Funciones para poder navegar a otras pantallas
     const buttonSearch = () => {
         navigation.navigate("searchScreen", {});
         closeMenu();
@@ -50,6 +52,8 @@ const MainScreen = ({ navigation })=>{
             </View>
         );
     };
+
+    // Contiene las imágenes que están almacenadas en el repositorio
     const imagesWallpapers = {
         1: require("../../assets/Wallpapers/1.jpg"),
         2: require("../../assets/Wallpapers/2.jpg"),
@@ -69,6 +73,9 @@ const MainScreen = ({ navigation })=>{
         16: require("../../assets/Wallpapers/16.jpg"),
       } 
           
+
+
+      // Muestra los wallpapers que están en la base de datos
     return(
         <Container style={styles.container}>  
         <Provider>        

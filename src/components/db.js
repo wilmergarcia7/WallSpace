@@ -2,6 +2,7 @@ import React from "react";
 import * as SQLite from "expo-sqlite";
 //import DeviceInfo from "react-native-device-info";
 // https://docs.expo.io/versions/latest/sdk/sqlite/
+
 // Crea y abre la base de datos
 const db = SQLite.openDatabase("wallpapers.db");
 
@@ -11,7 +12,7 @@ let getDate = new Date();
 
 // Funcionalidades de la base de datos
 
-// Obtener las notas del usuario
+// Obtener los wallpapers
 const getWallpapers = (setWallpapersFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
@@ -98,7 +99,7 @@ const getWallpaperById = (code,setWallpapersFunc) => {
 };
 
 // obtener wallpaper por nombre
-const getWallpaperById = (name,setWallpapersFunc) => {
+const getWallpaperByName = (name,setWallpapersFunc) => {
   db.transaction((tx) => {
     tx.executeSql(
       "select * from wallpapers where name = ?",
@@ -212,4 +213,5 @@ export const database = {
   setupWallpapersAsync,
   deleteWallpaperById,
   getWallpaperById,
+  getWallpaperByName,
 };

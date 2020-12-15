@@ -1,7 +1,7 @@
 import React, { useEffect, createContext, useState } from "react";
 import { database } from "../components/db";
 
-// Crear el contexto de las notas
+// Crear el contexto de los wallpapers
 export const WallpaperContext = createContext({});
 
 export const WallpaperContextProvider = (props) => {
@@ -18,39 +18,48 @@ export const WallpaperContextProvider = (props) => {
     refreshWallpapers();
   }, []);
 
+  // Refresca la base de datos
   const refreshWallpapers = () => {
     return database.getWallpapers(setWallpapers);
   };
 
+  // Llama la función update de la base de datos
   const editWallpaper = async (name, tag, id) => {
     await database.editWallpaper(name, tag, id, refreshWallpapers);
     return refreshWallpapers();
   };
- 
+
+  // Elimina wallpaper por id
   const deleteWallpaperById = async (id) => {
     await database.deleteWallpaperById(id, refreshWallpapers);
     return refreshWallpapers();
   };
 
+  // Añade un nuevo wallpaper
   const addNewWallpaper = async (name, code, tag) => {
     await database.addWallpapers(name,  code, tag, refreshWallpapers);
     return refreshWallpapers();
   };
 
+  // Elimina la base de datos
   const dropWallpaper = async () =>{
   await database.dropDatabaseTableAsync();
   return refreshWallpapers();
   };
 
+  // Obtiene toda la base datos
   const getAllWallpapers = async () =>{
     await database.getWallpapers(refreshWallpapers);
     return refreshWallpapers();
   }
 
+  // Obtiene el wallpaper por código
   const getWallpaperById = async (code) =>{
     await database.getWallpaperById(code, setWallpaper);
     return refreshWallpapers();
   };
+
+  //Obtiene un wallpaper por nombre
   const getWallpaperByName = async (name) =>{
     await database.getWallpaperByName(name, setWallpaper);
     return refreshWallpapers();

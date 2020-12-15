@@ -12,35 +12,35 @@ import { Provider } from 'react-native-paper';
 
 const { width, height } = Dimensions.get("window");
 
-const SearchScreen = ()=>{
+const nameScreen = ({ navigation })=>{
 
   let [fontsLoaded] = useFonts({
     'Triforce': require("../../assets/fonts/Triforce.ttf")
   });
 
-  const [search, setSearch] = useState("");
-  const [searchError, setSearchError] = useState(false);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState(false);
   
-  const handlerSearch = () =>{
-    if (!search) {
-      setSearchError(true)
+  const handlername = () =>{
+    if (!name) {
+      setNameError(true)
     }else
     {
-      navigation.navigate("searchScreen", {search})
+      navigation.navigate("results", {name})
       // Borra la búsqueda anterior y coloca el espacio vacío
-      setSearch("");
-      setSearchError(false);
+      setName("");
+      setNameError(false);
     }
   };
 
   // Remueve el valor de error del input de búsqueda si el usuario ingresa información
      // y llama a los hooks correspondientes para obtener la información.  
      useEffect(() => {
-      if (search) setSearchError(false);
-    }, [search]);
+      if (name) setNameError(false);
+    }, [name]);
 
-
-if(!fontsLoaded){
+    // Verifica que exista la fuente de texto
+    if(!fontsLoaded){
         return(
             <View style={{flex: 1, justifyContent: "center", backgroundColor:"#025959"}}>
             <Image source={require("../../assets/Wallpapers/Cucco.gif")} style={{height:110,width:110, marginLeft: "35%"}}/>
@@ -48,14 +48,19 @@ if(!fontsLoaded){
         );
     };
 
+
+    /*
+        Esta función se encarga de realizar una búsqueda de una imagen en la base de datos, con el nombre muestra la imagen 
+        registrada. Se enviá el parametro name a la pantalla de resultados.
+    */
     return(
       <Container style={styles.container}>  
       <Provider>        
           <Header searchBar style={styles.header}>
             <Item style={styles.item}>
-            <Input placeholder="Buscar" value={search} onChangeText={setSearch} style={searchError ? styles.inputError : null} />
+            <Input placeholder="Buscar" value={name} onChangeText={setName} style={nameError ? styles.inputError : null} />
             </Item>
-              <Button onPress={handlerSearch} style={styles.button} name="searchScreen">
+              <Button onPress={handlername} style={styles.button} name="searchScreen">
                   <Image  source={require("../../assets/icons/search.png")}
                           style={styles.iconSize}/>
              </Button>
@@ -67,89 +72,45 @@ if(!fontsLoaded){
 };
 
 const styles = StyleSheet.create({
-  container: {
-      backgroundColor:"#0D0D0D",
-      width: width,
-      height: height,
-  },
-  header:{     
-      alignItems: "center",
-      backgroundColor: "#025159",
-      position:"relative",
-  },
-  text:{
-      color: "#ffffff",
-      fontFamily: "Triforce",
-      margin: "18%",
-      fontSize: 35,
-  },
-  iconSize:{
-      width: 30,
-      height: 30,
-  },
-  h1:{
-      color: "#ffffff",
-      fontFamily: "Triforce",
-      fontSize: 17,
-      marginLeft:"6%",
-      marginRight:"6%",
-  },
-  view:{
-      flex:1,
-      flexDirection:"row",
-      alignSelf:"center",
-      marginLeft:8,
-      marginRight:20,
-  },
-  imageWallpaper:{
-      width: 120,
-      height: 210,
-      margin:2,
-      alignSelf:"center",
-  },
-  content: {
-      backgroundColor: "#027373",
-      alignContent:"center",
-      height: height,
-      width: width,
-  },
-  viewRow:{
-      backgroundColor:"#0D0D0D",
-      flexDirection:"row",
-      alignSelf:"center",       
-  },
-  cardItem:{
-      backgroundColor:"#027373",
-      alignItems:"center",
-      borderColor:"#027373",
-      padding:2,
-      marginLeft:5,
-      marginRight:5,
-  },
-  button:{
-      backgroundColor:"#025159",
-      borderColor: "#025159",
-      width: 42,
-      height: 42,
-      alignSelf:"center",
-  },
-  item:{
-      alignItems:"center",
-  },
-  viewMenu:{
-      paddingTop: 0,
-      flexDirection: 'row',
-      justifyContent: "flex-start",
-      position:"relative",
-      fontFamily: "Triforce",
-      
-  },
-  menuItem:{
-      color:"#025159",    
-  },
-  menu:{
-      fontFamily: "Triforce",
-  }
+    container: {
+        backgroundColor:"#0D0D0D",
+        width: width,
+        height: height,
+    },
+    header:{     
+        alignItems: "center",
+        backgroundColor: "#025159",
+        position:"relative",
+        fontFamily: "Triforce",
+    },
+    text:{
+        color: "#ffffff",
+        fontFamily: "Triforce",
+        margin: "18%",
+        fontSize: 35,
+    },
+    iconSize:{
+        width: 30,
+        height: 30,
+    },
+    content: {
+        backgroundColor: "#027373",
+        alignContent:"center",
+        height: height,
+        width: width,
+    },
+    button:{
+        backgroundColor:"#025159",
+        borderColor: "#025159",
+        width: 42,
+        height: 42,
+        alignSelf:"center",
+    },
+    item:{
+        alignItems:"center",
+        fontFamily: "Triforce",
+        
+    }
 });
 
-export default SearchScreen; 
+export default nameScreen; 
